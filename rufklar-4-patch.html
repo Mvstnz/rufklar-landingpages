@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js')</script>
+<title>Rufklar – Schlechte Google-Bewertungen? Gelöscht.</title>
+<meta name="description" content="Rufklar entfernt negative Google-Bewertungen. 25 € pro erfolgreicher Löschung, ab der 5. nur 20 €. Kein Erfolg, keine Kosten.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ RUFKLAR · PATCH EDITION ============
+   near-black · lime · violet · big type · motion
+   ================================================== */
+:root{
+  --bg:#040404;
+  --panel:#0d0d0e;
+  --panel-2:#131315;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.18);
+  --text:#f4f4f0;
+  --muted:#a3a39c;
+  --dim:#6f6f68;
+  --lime:#c6ff4d;
+  --lime-deep:#9fe000;
+  --violet:#9d7bff;
+  --danger:#ff5470;
+  --sans:'Space Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono','Cascadia Mono',Consolas,monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+::selection{background:var(--lime);color:#040404}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:4px}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+[hidden]{display:none!important}
+
+.wrap{width:min(1180px,92%);margin-inline:auto}
+.mono{font-family:var(--mono)}
+
+/* ---------- Intro ---------- */
+.intro{
+  position:fixed;inset:0;z-index:200;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;
+  transition:transform .7s var(--ease),visibility 0s .7s;
+}
+.intro.done{transform:translateY(-100%);visibility:hidden}
+html:not(.js) .intro{display:none}
+.intro-word{
+  font-weight:700;font-size:clamp(2.4rem,7vw,5rem);letter-spacing:-.03em;
+  overflow:hidden;
+}
+.intro-word span{display:inline-block;transform:translateY(110%);animation:introUp .7s var(--ease) .1s forwards}
+.intro-word i{font-style:normal;color:var(--lime)}
+.intro-bar{width:min(280px,60vw);height:2px;background:rgba(255,255,255,.12);overflow:hidden;border-radius:2px}
+.intro-bar i{display:block;height:100%;width:100%;background:var(--lime);transform:scaleX(0);transform-origin:left;animation:introBar .8s var(--ease) .15s forwards}
+@keyframes introUp{to{transform:translateY(0)}}
+@keyframes introBar{to{transform:scaleX(1)}}
+
+/* ---------- Header ---------- */
+.site-head{
+  position:sticky;top:0;z-index:90;
+  background:rgba(4,4,4,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.head-in{height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:700;font-size:1.25rem;letter-spacing:-.02em}
+.brand i{font-style:normal;color:var(--lime)}
+.nav{display:none;gap:26px;font-size:.92rem;color:var(--muted)}
+.nav a{transition:color .15s}
+.nav a:hover{color:var(--text)}
+.head-cta{display:none}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:50px;padding:13px 26px;border-radius:999px;
+  font-weight:600;font-size:.98rem;letter-spacing:.01em;white-space:nowrap;
+  transition:transform .15s var(--ease),background-color .15s,color .15s,border-color .15s;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--lime);color:#040404}
+.btn-primary:hover{background:var(--lime-deep)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text)}
+.btn-sm{min-height:42px;padding:9px 20px;font-size:.9rem}
+
+@media(min-width:860px){
+  .nav{display:flex}
+  .head-cta{display:inline-flex}
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:clamp(70px,11vh,130px) 0 clamp(60px,9vh,110px)}
+.hero-grid{display:grid;gap:clamp(44px,6vw,70px);align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+}
+.eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px var(--lime)}
+.hero h1{
+  margin-top:22px;
+  font-size:clamp(3rem,8.5vw,7rem);font-weight:700;
+  line-height:.96;letter-spacing:-.035em;
+}
+.hero h1 .accent{color:var(--violet);font-style:italic}
+.hero .sub{
+  margin-top:26px;max-width:32em;font-size:1.1rem;color:var(--muted);
+}
+.hero .sub b{color:var(--text);font-weight:600}
+.hero-actions{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}
+
+/* Floating review cards */
+.hero-visual{position:relative;min-height:380px}
+.rev{
+  position:absolute;width:min(330px,86%);
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  padding:18px 20px;box-shadow:0 30px 70px -30px rgba(0,0,0,.9);
+  animation:float 7s ease-in-out infinite;
+}
+.rev.r1{top:0;left:0;transform:rotate(-2.5deg);z-index:2}
+.rev.r2{bottom:8px;right:0;transform:rotate(2deg);animation-delay:-3.5s;z-index:1;opacity:.85}
+@keyframes float{50%{translate:0 -12px}}
+.rev-head{display:flex;align-items:center;gap:11px;margin-bottom:8px}
+.rev-avatar{
+  width:38px;height:38px;border-radius:50%;flex:none;
+  background:var(--panel-2);border:1px solid var(--line-strong);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:600;font-size:.8rem;color:var(--muted);
+}
+.rev-name{font-weight:600;font-size:.92rem}
+.rev-meta{font-family:var(--mono);font-size:.66rem;color:var(--dim);margin-top:2px}
+.rev-stars{color:var(--danger);font-size:.85rem;letter-spacing:2px;margin-bottom:6px}
+.rev-stars .off{color:#3a3a3c}
+.rev-text{font-size:.95rem;color:var(--text)}
+.rev-chip{
+  display:inline-flex;align-items:center;gap:7px;margin-top:12px;
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--lime);border:1px solid rgba(198,255,77,.35);border-radius:999px;padding:5px 12px;
+}
+.rev-chip i{width:6px;height:6px;border-radius:50%;background:var(--lime)}
+/* strike moment on r1 */
+.rev .strike{
+  position:absolute;left:14px;right:14px;top:58%;height:3px;border-radius:2px;
+  background:var(--lime);transform:scaleX(0);transform-origin:left center;z-index:3;
+}
+.rev.struck .strike{transform:scaleX(1);transition:transform .5s cubic-bezier(.65,0,.3,1) .55s}
+.rev.struck .rev-text{opacity:.3;transition:opacity .4s ease .6s}
+.rev .stamp{
+  position:absolute;top:-13px;right:14px;z-index:4;
+  padding:6px 12px;border:2px solid var(--lime);border-radius:8px;
+  color:var(--lime);background:rgba(4,4,4,.9);
+  font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  opacity:0;transform:rotate(8deg) scale(1.5);pointer-events:none;
+}
+.rev.struck .stamp{
+  opacity:1;transform:rotate(-6deg) scale(1);
+  transition:opacity .25s ease 1.05s,transform .35s cubic-bezier(.2,1.5,.4,1) 1.05s;
+}
+@media(max-width:859px){
+  .hero-visual{min-height:0;display:flex;justify-content:center;padding-top:8px}
+  .rev{position:relative;animation:none}
+  .rev.r2{display:none}
+}
+
+/* ---------- Marquee ---------- */
+.marquee{
+  border-block:1px solid var(--line);background:var(--panel);
+  overflow:hidden;padding:16px 0;
+}
+.marquee-track{display:flex;width:max-content;animation:marq 30s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee ul{display:flex;align-items:center;list-style:none;flex-shrink:0}
+.marquee li{
+  display:flex;align-items:center;gap:26px;padding-inline:26px;white-space:nowrap;
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+}
+.marquee li b{color:var(--text);font-weight:500}
+.marquee li svg{width:10px;height:10px;color:var(--lime);flex-shrink:0}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- Sections ---------- */
+.section{padding-block:clamp(80px,12vw,150px)}
+.s-head{max-width:820px}
+.s-head h2{
+  font-size:clamp(2.2rem,5.5vw,4.2rem);font-weight:700;
+  line-height:1;letter-spacing:-.03em;
+}
+.s-head h2 .accent{color:var(--lime);font-style:italic}
+.s-head .s-sub{margin-top:20px;max-width:34em;color:var(--muted);font-size:1.06rem}
+.s-head .s-sub b{color:var(--text);font-weight:600}
+.s-num{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dim);display:block;margin-bottom:18px;
+}
+
+/* Pain */
+.pains{margin-top:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
+.pain{
+  display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:baseline;
+  padding:22px 4px;border-bottom:1px solid var(--line);
+  transition:background-color .2s,padding-left .25s var(--ease);
+}
+.pain:hover{background:var(--panel);padding-left:16px}
+.pain .no{font-family:var(--mono);font-size:.78rem;color:var(--danger)}
+.pain h3{font-size:clamp(1.15rem,2.6vw,1.6rem);font-weight:600;letter-spacing:-.01em}
+@media(min-width:760px){.pain{grid-template-columns:64px 1fr 1fr}.pain p{color:var(--muted);font-size:.98rem}}
+
+/* Statement + pillars */
+.statement{text-align:left}
+.pillars{margin-top:clamp(44px,6vw,70px);display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+@media(min-width:820px){.pillars{grid-template-columns:repeat(3,1fr)}}
+.pillar{background:var(--bg);padding:clamp(26px,3.5vw,40px)}
+.pillar .p-ic{width:44px;height:44px;border-radius:12px;background:rgba(198,255,77,.1);border:1px solid rgba(198,255,77,.3);display:flex;align-items:center;justify-content:center;color:var(--lime);margin-bottom:22px}
+.pillar .p-ic svg{width:22px;height:22px}
+.pillar h3{font-size:1.3rem;letter-spacing:-.01em;margin-bottom:8px}
+.pillar p{color:var(--muted);font-size:.96rem}
+
+/* Features 01-04 */
+.feat{
+  display:grid;gap:20px;padding:clamp(36px,5vw,56px) 0;
+  border-top:1px solid var(--line);
+}
+.feat:last-child{border-bottom:1px solid var(--line)}
+@media(min-width:900px){.feat{grid-template-columns:110px 1.1fr 1.3fr;gap:clamp(24px,4vw,56px);align-items:baseline}}
+.feat-no{
+  font-family:var(--mono);font-size:.85rem;color:var(--dim);letter-spacing:.1em;
+}
+.feat-no b{color:var(--lime);font-weight:500}
+.feat h3{font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.02em;line-height:1.05}
+.feat-tag{
+  display:inline-block;margin-top:14px;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--lime);border:1px solid rgba(198,255,77,.35);border-radius:999px;padding:6px 14px;
+}
+.feat p{color:var(--muted);font-size:1.02rem;max-width:34em}
+.feat p b{color:var(--text);font-weight:600}
+
+/* ---------- Calculator ---------- */
+.calc{
+  margin-top:clamp(44px,6vw,64px);
+  display:grid;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  background:var(--panel);
+}
+@media(min-width:920px){.calc{grid-template-columns:1.1fr .9fr}}
+.calc-controls{padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;gap:24px}
+.calc-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.stepper{display:flex;align-items:center;justify-content:center;gap:clamp(20px,3vw,34px);margin-top:6px}
+.step-btn{
+  width:50px;height:50px;border-radius:50%;flex:none;
+  border:1.5px solid var(--line-strong);color:var(--text);
+  font-size:1.4rem;line-height:1;display:flex;align-items:center;justify-content:center;
+  transition:border-color .15s,background-color .15s,transform .12s,opacity .15s;
+}
+.step-btn:hover:not(:disabled){border-color:var(--lime);color:var(--lime)}
+.step-btn:active:not(:disabled){transform:scale(.9)}
+.step-btn:disabled{opacity:.25;cursor:default}
+.stepper output{
+  font-weight:700;font-size:clamp(3rem,6vw,3.8rem);line-height:1;letter-spacing:-.03em;
+  min-width:2.2ch;text-align:center;font-variant-numeric:tabular-nums;
+}
+.stepper output.pop{animation:num-pop .3s cubic-bezier(.2,1.4,.4,1)}
+@keyframes num-pop{0%{transform:scale(.84);opacity:.4}100%{transform:scale(1);opacity:1}}
+.q-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.q-chip{
+  min-width:54px;min-height:44px;padding:8px 18px;border-radius:999px;
+  border:1.5px solid var(--line-strong);font-weight:600;font-size:.95rem;color:var(--muted);
+  transition:border-color .15s,color .15s,background-color .15s,transform .12s;
+}
+.q-chip:hover{border-color:var(--lime);color:var(--lime)}
+.q-chip:active{transform:scale(.93)}
+.q-chip[aria-pressed=true]{background:var(--lime);border-color:var(--lime);color:#040404}
+.calc input[type=range]{
+  width:100%;height:30px;appearance:none;-webkit-appearance:none;background:transparent;cursor:pointer;
+}
+.calc input[type=range]::-webkit-slider-runnable-track{
+  height:8px;border-radius:999px;
+  background:linear-gradient(to right,var(--lime) var(--fill,10%),rgba(255,255,255,.14) var(--fill,10%));
+}
+.calc input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;
+  background:#040404;border:3px solid var(--lime);box-shadow:0 0 0 4px rgba(198,255,77,.15);
+  transition:transform .15s;
+}
+.calc input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.15)}
+.calc input[type=range]::-moz-range-track{
+  height:8px;border-radius:999px;
+  background:linear-gradient(to right,var(--lime) var(--fill,10%),rgba(255,255,255,.14) var(--fill,10%));
+}
+.calc input[type=range]::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;background:#040404;border:3px solid var(--lime);
+}
+.dots{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+.dot{
+  width:11px;height:11px;border-radius:50%;
+  background:rgba(255,255,255,.07);border:1.5px solid var(--line-strong);transform:scale(.82);
+  transition:background-color .25s,border-color .25s,transform .3s cubic-bezier(.2,1.5,.4,1);
+}
+.dot.on{background:var(--lime);border-color:var(--lime);transform:scale(1)}
+.dot.on.gold{background:var(--violet);border-color:var(--violet)}
+.tier-badge{
+  display:flex;align-items:center;justify-content:center;gap:8px;min-height:1.6em;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+}
+.tier-badge.active{color:var(--violet)}
+.calc-receipt{
+  padding:clamp(28px,4vw,44px);display:flex;flex-direction:column;
+  background:var(--panel-2);border-top:1px solid var(--line);
+}
+@media(min-width:920px){.calc-receipt{border-top:0;border-left:1px solid var(--line)}}
+.receipt-rows{margin-top:16px}
+.receipt-row{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,.14);font-size:.95rem}
+.receipt-row dt{color:var(--muted)}
+.receipt-row dd{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.calc-total{margin-top:auto;padding-top:24px}
+.sum-label{font-size:.9rem;color:var(--muted)}
+.sum{display:block;margin-top:4px;font-size:clamp(2.8rem,5vw,3.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.sum.bump{animation:bump .28s ease;transform-origin:left bottom}
+@keyframes bump{40%{transform:scale(1.05)}}
+.sum-sub{display:block;min-height:1.5em;margin-top:6px;font-size:.9rem;font-weight:600;color:var(--lime)}
+.calc-receipt .btn{width:100%;margin-top:22px}
+.calc-footnote{margin-top:14px;font-size:.8rem;color:var(--dim)}
+.terms{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.term-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--line);border-radius:999px;padding:9px 16px;
+  font-size:.86rem;color:var(--muted);
+}
+.term-chip svg{width:14px;height:14px;color:var(--lime);flex-shrink:0}
+@media(prefers-reduced-motion:reduce){
+  .dot,.step-btn,.q-chip{transition:none}
+  .stepper output.pop,.tier-badge.active,.sum.bump{animation:none}
+}
+
+/* ---------- Closing / Form ---------- */
+.closing h2{font-size:clamp(2.6rem,7vw,5.5rem);font-weight:700;line-height:.98;letter-spacing:-.035em}
+.closing h2 .accent{color:var(--violet);font-style:italic}
+.closing .s-sub{margin-top:22px}
+.form-card{
+  margin-top:clamp(40px,6vw,60px);max-width:640px;
+  background:var(--panel);border:1px solid var(--line);border-radius:20px;
+  padding:clamp(26px,4vw,40px);
+}
+.form-grid{display:grid;gap:18px}
+@media(min-width:620px){.form-2{grid-template-columns:1fr 1fr}}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.field input{
+  font:inherit;color:var(--text);background:var(--bg);
+  border:1px solid var(--line-strong);border-radius:12px;padding:14px 16px;width:100%;
+  transition:border-color .15s,box-shadow .15s;
+}
+.field input::placeholder{color:var(--dim)}
+.field input:focus{outline:none;border-color:var(--lime);box-shadow:0 0 0 3px rgba(198,255,77,.15)}
+.form-foot{margin-top:6px}
+.form-foot small{display:block;margin-top:12px;color:var(--dim);font-size:.82rem}
+.form-success{
+  margin-top:0;border:1px solid rgba(198,255,77,.4);border-radius:20px;background:rgba(198,255,77,.06);
+  padding:clamp(26px,4vw,40px);
+}
+.form-success h3{font-size:1.4rem;margin-bottom:10px}
+.form-success p{color:var(--muted);margin-bottom:20px}
+.link-btn{font-weight:600;color:var(--lime);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- FAQ ---------- */
+.faq-list{margin-top:clamp(40px,6vw,60px);max-width:760px;border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line)}
+.faq-list summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;
+  padding:22px 2px;font-weight:600;font-size:1.08rem;letter-spacing:-.01em;
+}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:hover{color:var(--lime)}
+.fx{flex:none;position:relative;width:18px;height:18px}
+.fx::before,.fx::after{content:'';position:absolute;left:50%;top:50%;background:var(--lime);transition:transform .22s ease}
+.fx::before{width:15px;height:2px;transform:translate(-50%,-50%)}
+.fx::after{width:2px;height:15px;transform:translate(-50%,-50%)}
+details[open] .fx::after{transform:translate(-50%,-50%) scaleY(0)}
+details[open] summary{color:var(--lime)}
+.faq-answer{padding:0 40px 24px 2px;color:var(--muted);max-width:60ch}
+
+/* ---------- Footer ---------- */
+.site-foot{border-top:1px solid var(--line);padding:40px 0 44px;color:var(--dim);font-size:.85rem}
+.foot-in{display:flex;flex-wrap:wrap;gap:14px 34px;justify-content:space-between;align-items:center}
+.foot-in a:hover{color:var(--text)}
+.foot-links{display:flex;gap:22px}
+
+/* ---------- Reveal ---------- */
+html.js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s ease var(--rd,0ms),transform .7s var(--ease) var(--rd,0ms)}
+html.js [data-reveal].is-in{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .intro{display:none}
+  .marquee-track{animation:none}
+  .rev{animation:none}
+  [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+  .rev .strike{transform:scaleX(1)}
+  .rev .stamp{opacity:1;transform:rotate(-6deg) scale(1)}
+  .rev .rev-text{opacity:.3}
+}
+</style>
+</head>
+<body>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-word"><span>Rufklar<i>.</i></span></div>
+  <div class="intro-bar"><i></i></div>
+</div>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top">Rufklar<i>.</i></a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#problem">Das Problem</a>
+      <a href="#so-gehts">So geht's</a>
+      <a href="#preise">Preise</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary btn-sm head-cta" href="#kontakt">Kostenlos prüfen lassen</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow" data-reveal>Google-Bewertungen · Entfernt</p>
+        <h1 data-reveal style="--rd:80ms">Schlechte Bewertungen?<br><span class="accent">Gelöscht.</span></h1>
+        <p class="sub" data-reveal style="--rd:160ms">Rufklar prüft, meldet, entfernt. Du zahlst nur für Erfolg: <b>25&nbsp;€ pro Löschung, ab der 5. nur 20&nbsp;€.</b></p>
+        <div class="hero-actions" data-reveal style="--rd:240ms">
+          <a class="btn btn-primary" href="#kontakt">Kostenlos prüfen lassen</a>
+          <a class="btn btn-ghost" href="#so-gehts">So geht's</a>
+        </div>
+      </div>
+      <div class="hero-visual" data-reveal style="--rd:200ms">
+        <article class="rev r1" id="hero-rev" aria-label="Beispiel: Eine gemeldete Bewertung wurde entfernt">
+          <span class="strike" aria-hidden="true"></span>
+          <span class="stamp" aria-hidden="true">Entfernt</span>
+          <div class="rev-head">
+            <span class="rev-avatar" aria-hidden="true">T.&nbsp;K.</span>
+            <span>
+              <span class="rev-name">„T. K.“</span>
+              <p class="rev-meta">vor 2 Tagen · kein Kundenkontakt</p>
+            </span>
+          </div>
+          <p class="rev-stars" aria-hidden="true">★<span class="off">★★★★</span></p>
+          <p class="rev-text">„Absolute Abzocke! Finger weg von dem Laden!!!“</p>
+          <span class="rev-chip"><i></i>Beleidigung · gemeldet</span>
+        </article>
+        <article class="rev r2" aria-hidden="true">
+          <div class="rev-head">
+            <span class="rev-avatar">M.&nbsp;S.</span>
+            <span>
+              <span class="rev-name">„M. S.“</span>
+              <p class="rev-meta">vor 1 Woche · nie Kunde gewesen</p>
+            </span>
+          </div>
+          <p class="rev-stars">★<span class="off">★★★★</span></p>
+          <p class="rev-text">„Katastrophe, nie wieder!“</p>
+          <span class="rev-chip"><i></i>Fake · entfernt</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <aside class="marquee" aria-label="Konditionen">
+    <div class="marquee-track">
+      <ul>
+        <li><b>Kein Erfolg, keine Kosten</b><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+        <li><b>25&nbsp;€</b> pro Löschung<svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+        <li>Ab der 5. nur <b>20&nbsp;€</b><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+        <li><b>Rechnung erst nach Abschluss</b><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+        <li><b>Start in 2 Minuten</b><svg viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+      </ul>
+      <ul aria-hidden="true">
+        <li><b>Kein Erfolg, keine Kosten</b><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+        <li><b>25&nbsp;€</b> pro Löschung<svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+        <li>Ab der 5. nur <b>20&nbsp;€</b><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+        <li><b>Rechnung erst nach Abschluss</b><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+        <li><b>Start in 2 Minuten</b><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.6 4.4L12 6 7.6 7.6 6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- ============ PROBLEM ============ -->
+  <section class="section" id="problem">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <span class="s-num">01 · Das Problem</span>
+        <h2>Du machst deinen Laden.<br>Google macht dir <span class="accent">Sorgen.</span></h2>
+      </div>
+      <div class="pains" data-reveal style="--rd:100ms">
+        <div class="pain">
+          <span class="no">/01</span>
+          <h3>1 Stern, kein Text, kein Kontakt</h3>
+          <p>Oft ein Wettbewerber oder Troll – dein Profil zeigt es nicht.</p>
+        </div>
+        <div class="pain">
+          <span class="no">/02</span>
+          <h3>Beleidigungen ganz oben</h3>
+          <p>„Abzocke“, „Finger weg“ – das erste, was Kunden lesen.</p>
+        </div>
+        <div class="pain">
+          <span class="no">/03</span>
+          <h3>Der Schnitt sinkt Monat für Monat</h3>
+          <p>Jeder 1-Sterne-Eintrag drückt deinen Durchschnitt – sichtbar für alle.</p>
+        </div>
+        <div class="pain">
+          <span class="no">/04</span>
+          <h3>Selbst melden? Wird meist abgelehnt</h3>
+          <p>Standardmeldungen ohne Begründung laufen ins Leere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATEMENT ============ -->
+  <section class="section statement">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <span class="s-num">02 · Die Lösung</span>
+        <h2>Es geht auch <span class="accent">einfacher.</span></h2>
+        <p class="s-sub">Du gibst uns den Link. Wir übernehmen den Rest – <b>Risiko liegt bei uns, nicht bei dir.</b></p>
+      </div>
+      <div class="pillars" data-reveal style="--rd:120ms">
+        <div class="pillar">
+          <span class="p-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5l8-3z"/><polyline points="8.5 12.2 11 14.7 15.8 9.6"/></svg></span>
+          <h3>Nur Erfolg zählt</h3>
+          <p>Abgerechnet wird ausschließlich, was wirklich gelöscht wurde. Alles andere kostet 0&nbsp;€.</p>
+        </div>
+        <div class="pillar">
+          <span class="p-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+          <h3>Ergebnis in Tagen</h3>
+          <p>Heute beauftragen, meist binnen weniger Tagen Entscheidung. Wir fassen nach, bis Google reagiert.</p>
+        </div>
+        <div class="pillar">
+          <span class="p-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg></span>
+          <h3>Kein Abo, keine Vorkasse</h3>
+          <p>Keine Grundgebühr, kein Vertrag-Marathon. Rechnung erst am Ende, 14 Tage Zahlungsfrist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES 01-04 ============ -->
+  <section class="section" id="so-gehts" style="padding-top:0">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <span class="s-num">03 · So geht's</span>
+        <h2>Vier Schritte.<br><span class="accent">Null Aufwand für dich.</span></h2>
+      </div>
+      <div style="margin-top:clamp(44px,6vw,70px)">
+        <article class="feat" data-reveal>
+          <p class="feat-no"><b>01</b> / 04</p>
+          <div>
+            <h3>Kostenlose Prüfung</h3>
+            <span class="feat-tag">0&nbsp;€ · unverbindlich</span>
+          </div>
+          <p>Du schickst den Link zu deinem Google-Profil. Wir prüfen jede Bewertung einzeln und sagen dir ehrlich, <b>welche Fälle Chancen haben</b> – bevor irgendwas passiert.</p>
+        </article>
+        <article class="feat" data-reveal>
+          <p class="feat-no"><b>02</b> / 04</p>
+          <div>
+            <h3>Begründete Meldung</h3>
+            <span class="feat-tag">Dokumentiert</span>
+          </div>
+          <p>Für jeden Fall mit klarem Verstoß reichen wir eine dokumentierte Meldung bei Google ein – <b>mit dem stärksten Argument</b>, nicht mit der Standard-Schaltfläche.</p>
+        </article>
+        <article class="feat" data-reveal>
+          <p class="feat-no"><b>03</b> / 04</p>
+          <div>
+            <h3>Nachfassen inklusive</h3>
+            <span class="feat-tag">Bis zur Entscheidung</span>
+          </div>
+          <p>Google antwortet nicht? <b>Wir legen nach.</b> Du musst nichts verfolgen, nichts erinnern, nichts schreiben.</p>
+        </article>
+        <article class="feat" data-reveal>
+          <p class="feat-no"><b>04</b> / 04</p>
+          <div>
+            <h3>Rechnung nur bei Erfolg</h3>
+            <span class="feat-tag">14 Tage Zahlungsfrist</span>
+          </div>
+          <p>Gelöscht = <b>25&nbsp;€, ab der 5. Löschung je 20&nbsp;€</b>. Abgelehnt = <b>0&nbsp;€</b>. Die Rechnung kommt erst am Ende.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREISE ============ -->
+  <section class="section" id="preise" style="padding-top:0">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <span class="s-num">04 · Preise</span>
+        <h2>Ein Preis. <span class="accent">Zwei Stufen.</span></h2>
+        <p class="s-sub">Du bestimmst selbst, wie viele Bewertungen wir übernehmen – <b>der Staffelpreis greift automatisch.</b></p>
+      </div>
+
+      <div class="calc" role="group" aria-label="Preisrechner" data-reveal style="--rd:100ms">
+        <div class="calc-controls">
+          <p class="calc-label" id="calc-label">Wie viele Bewertungen sollen wir übernehmen?</p>
+          <div class="stepper">
+            <button type="button" id="q-dec" aria-label="Anzahl verringern">&minus;</button>
+            <output id="q-out" for="q-range" aria-live="polite">3</output>
+            <button type="button" id="q-inc" aria-label="Anzahl erhöhen">+</button>
+          </div>
+          <label class="sr-only" for="q-range" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Anzahl der zu meldenden Bewertungen</label>
+          <input type="range" id="q-range" min="1" max="20" step="1" value="3">
+          <div class="dots" id="dots" aria-hidden="true"></div>
+          <p class="tier-badge" id="tier-note">Ab 5 Löschungen: je 20&nbsp;€ statt 25&nbsp;€</p>
+        </div>
+        <div class="calc-receipt">
+          <p class="calc-label">Deine Kostenschätzung</p>
+          <dl class="receipt-rows">
+            <div class="receipt-row"><dt>Zu übernehmende Bewertungen</dt><dd id="row-count">3</dd></div>
+            <div class="receipt-row"><dt>Preis je erfolgreicher Löschung</dt><dd id="row-unit">25&nbsp;€ pro Stück</dd></div>
+            <div class="receipt-row"><dt>Abgelehnte Fälle</dt><dd>0&nbsp;€</dd></div>
+          </dl>
+          <div class="calc-total">
+            <span class="sum-label">Maximalpreis bei voller Erfolgsquote</span>
+            <strong class="sum" id="calc-total">75&nbsp;€</strong>
+            <span class="sum-sub" id="calc-save" aria-live="polite"></span>
+          </div>
+          <a class="btn btn-primary" id="calc-cta" href="#kontakt">3 Bewertungen kostenlos prüfen lassen</a>
+          <p class="calc-footnote">Tatsächlich zahlst du nur für Bewertungen, die Google wirklich entfernt. Abgerechnet wird erst nach Abschluss.</p>
+        </div>
+      </div>
+
+      <div class="terms" data-reveal style="--rd:140ms">
+        <span class="term-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12.5 10 17.5 19 7.5"/></svg>Rechnung erst nach Abschluss</span>
+        <span class="term-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12.5 10 17.5 19 7.5"/></svg>14 Tage Zahlungsfrist</span>
+        <span class="term-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12.5 10 17.5 19 7.5"/></svg>Abgelehnte Fälle kosten nichts</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING / FORM ============ -->
+  <section class="section closing" id="kontakt">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <span class="s-num">05 · Loslegen</span>
+        <h2>Dein Ruf.<br>Wieder <span class="accent">sauber.</span></h2>
+        <p class="s-sub">Google-Maps-Link einreichen – <b>du erhältst unsere ehrliche Einschätzung.</b> Erst danach entscheidest du.</p>
+      </div>
+      <div class="form-card" data-reveal style="--rd:100ms">
+        <form id="anfrage" class="form-grid" action="#" novalidate>
+          <div class="form-grid form-2">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" placeholder="Vor- und Nachname" required>
+            </div>
+            <div class="field">
+              <label for="email">E-Mail</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="name@unternehmen.de" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="maps">Link zum Google-Profil</label>
+            <input type="url" id="maps" name="maps" placeholder="https://maps.google.com/…" required>
+          </div>
+          <div class="field">
+            <label for="anzahl">Anzahl der zu meldenden Bewertungen</label>
+            <input type="number" id="anzahl" name="anzahl" min="1" max="50" inputmode="numeric" placeholder="z. B. 3 – leer lassen, wenn noch unklar">
+          </div>
+          <div class="form-foot">
+            <button type="submit" class="btn btn-primary">Kostenlos prüfen lassen</button>
+            <small>Unverbindlich und kostenlos. Deine Angaben dienen allein der Bearbeitung deiner Anfrage.</small>
+          </div>
+        </form>
+        <div id="form-success" class="form-success" hidden>
+          <h3>Danke, <span id="success-name">sehr geehrte Damen und Herren</span>.</h3>
+          <p>Deine Angaben sind erfasst: <strong id="success-summary"></strong>. Schick sie jetzt per E-Mail ab – wir melden uns mit der Ersteinschätzung.</p>
+          <a id="mailto-link" class="btn btn-primary" href="#">Anfrage per E-Mail öffnen</a>
+          <button type="button" class="link-btn" id="edit-again" style="margin-left:14px">Angaben korrigieren</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq" style="padding-top:0">
+    <div class="wrap">
+      <div class="s-head" data-reveal>
+        <span class="s-num">06 · FAQ</span>
+        <h2>Kurze Fragen.<br><span class="accent">Kurze Antworten.</span></h2>
+      </div>
+      <div class="faq-list" data-reveal style="--rd:100ms">
+        <details>
+          <summary>Ist das legal?<span class="fx" aria-hidden="true"></span></summary>
+          <p class="faq-answer">Ja. Wir nutzen ausschließlich den offiziellen Meldeprozess von Google. Kein Konto-Zugriff, keine Fake-Antworten, keine Grauzone.</p>
+        </details>
+        <details>
+          <summary>Was kostet es?<span class="fx" aria-hidden="true"></span></summary>
+          <p class="faq-answer">25&nbsp;€ pro erfolgreicher Löschung, ab der 5. Löschung im selben Auftrag je 20&nbsp;€. Ablehnungen kosten nichts.</p>
+        </details>
+        <details>
+          <summary>Wie schnell geht das?<span class="fx" aria-hidden="true"></span></summary>
+          <p class="faq-answer">Meist wenige Tage. Wir behalten jeden Fall im Blick und fassen nach, bis Google entschieden hat.</p>
+        </details>
+        <details>
+          <summary>Was, wenn Google ablehnt?<span class="fx" aria-hidden="true"></span></summary>
+          <p class="faq-answer">Dann kostet dich dieser Fall nichts. Punkt.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <p>© 2026 Rufklar · Keine Rechtsberatung. Wir melden Inhalte auf Grundlage der veröffentlichten Google-Richtlinien direkt bei Google.</p>
+    <nav class="foot-links" aria-label="Rechtliches">
+      <a href="#top">Impressum (Platzhalter)</a>
+      <a href="#top">Datenschutz (Platzhalter)</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Intro */
+  var intro=document.getElementById('intro');
+  if(reduce){intro.parentNode.removeChild(intro)}
+  else{setTimeout(function(){intro.classList.add('done')},1000)}
+
+  /* Hero strike moment */
+  var rev=document.getElementById('hero-rev');
+  if(rev){
+    if(reduce){rev.classList.add('struck')}
+    else{setTimeout(function(){rev.classList.add('struck')},1500)}
+  }
+
+  /* Reveals */
+  var els=document.querySelectorAll('[data-reveal]');
+  if(reduce||!('IntersectionObserver' in window)){
+    els.forEach(function(el){el.classList.add('is-in')});
+  }else{
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}
+      });
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){io.observe(el)});
+  }
+
+  /* Calculator */
+  var qRange=document.getElementById('q-range');
+  var qOut=document.getElementById('q-out');
+  var qDec=document.getElementById('q-dec');
+  var qInc=document.getElementById('q-inc');
+  var rowCount=document.getElementById('row-count');
+  var rowUnit=document.getElementById('row-unit');
+  var calcTotal=document.getElementById('calc-total');
+  var calcSave=document.getElementById('calc-save');
+  var tierNote=document.getElementById('tier-note');
+  var calcCta=document.getElementById('calc-cta');
+  var anzahlField=document.getElementById('anzahl');
+  var dotsWrap=document.getElementById('dots');
+
+  for(var i=1;i<=20;i++){
+    var d=document.createElement('span');
+    d.className='dot';d.dataset.n=i;
+    dotsWrap.appendChild(d);
+  }
+  var dots=dotsWrap.children;
+
+  function euro(n){return n.toLocaleString('de-DE')+'\u00a0€'}
+  function unitPrice(n){return n>=5?20:25}
+
+  function renderCalc(){
+    var n=parseInt(qRange.value,10),unit=unitPrice(n),total=n*unit;
+    qOut.textContent=n;
+    qOut.classList.remove('pop');void qOut.offsetWidth;qOut.classList.add('pop');
+    rowCount.textContent=n;
+    rowUnit.textContent=euro(unit)+' pro Stück';
+    calcTotal.textContent=euro(total);
+    calcTotal.classList.remove('bump');void calcTotal.offsetWidth;calcTotal.classList.add('bump');
+    if(n>=5){
+      calcSave.textContent='Du sparst '+euro(n*(25-unit))+' gegenüber dem Einzelpreis.';
+      tierNote.textContent='Staffel aktiv: je 20\u00a0€ statt 25\u00a0€';
+      tierNote.classList.add('active');
+    }else if(n===4){
+      calcSave.textContent='';
+      tierNote.textContent='Mit 5 zahlst du ebenfalls 100\u00a0€ – die 5. wäre effektiv gratis.';
+      tierNote.classList.remove('active');
+    }else{
+      calcSave.textContent='';
+      tierNote.textContent='Ab 5 Löschungen: je 20\u00a0€ statt 25\u00a0€';
+      tierNote.classList.remove('active');
+    }
+    calcCta.textContent=(n===1?'1 Bewertung':n+' Bewertungen')+' kostenlos prüfen lassen';
+    qRange.style.setProperty('--fill',((n-1)/19*100)+'%');
+    for(var j=0;j<dots.length;j++){
+      dots[j].classList.toggle('on',j<n);
+      dots[j].classList.toggle('gold',j>=4&&j<n);
+    }
+    if(anzahlField&&document.activeElement!==anzahlField){anzahlField.value=n}
+  }
+  qRange.addEventListener('input',renderCalc);
+  qDec.addEventListener('click',function(){if(+qRange.value>+qRange.min){qRange.value=+qRange.value-1;renderCalc()}});
+  qInc.addEventListener('click',function(){if(+qRange.value<+qRange.max){qRange.value=+qRange.value+1;renderCalc()}});
+  renderCalc();
+
+  /* Form */
+  var form=document.getElementById('anfrage');
+  var success=document.getElementById('form-success');
+  var editBtn=document.getElementById('edit-again');
+
+  function val(id){return (document.getElementById(id).value||'').trim()}
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return}
+    var name=val('name'),email=val('email'),maps=val('maps'),anzahl=val('anzahl');
+
+    document.getElementById('success-name').textContent=name.split(' ')[0];
+    document.getElementById('success-summary').textContent=
+      anzahl==='' ? 'Profil: '+maps : anzahl+' zu meldende Bewertung(en), Profil: '+maps;
+
+    var subject=encodeURIComponent('Anfrage Bewertungsprüfung – '+name);
+    var body=encodeURIComponent(
+      'Name: '+name+'\n'+
+      'E-Mail: '+email+'\n'+
+      'Google-Maps-Link: '+maps+'\n'+
+      'Zu meldende Bewertungen: '+(anzahl===''?'Noch unbekannt':anzahl)+'\n\n'+
+      'Bitte um kostenlose Ersteinschätzung.'
+    );
+    document.getElementById('mailto-link').href='mailto:kontakt@rufklar.de?subject='+subject+'&body='+body;
+
+    form.hidden=true;
+    success.hidden=false;
+    success.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+  });
+
+  editBtn.addEventListener('click',function(){
+    success.hidden=true;
+    form.hidden=false;
+    document.getElementById('name').focus();
+  });
+})();
+</script>
+
+</body>
+</html>
