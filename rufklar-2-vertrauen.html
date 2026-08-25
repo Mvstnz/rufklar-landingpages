@@ -244,11 +244,6 @@ table.compare{width:100%;min-width:760px;border-collapse:collapse;font-size:.95r
   font-size:.75rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
 }
 .compare thead th.hl{background:var(--accent);color:#fff}
-.hl-badge{
-  display:inline-block;margin-bottom:8px;padding:4px 12px;border-radius:999px;
-  background:#fff;color:var(--accent);
-  font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-}
 .compare tbody th[scope=row]{
   font-weight:600;color:var(--ink);white-space:nowrap;font-size:.92rem;
 }
@@ -262,46 +257,116 @@ table.compare{width:100%;min-width:760px;border-collapse:collapse;font-size:.95r
 
 /* ---------- Preisrechner ---------- */
 .calc{
-  display:grid;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;
-  box-shadow:0 18px 44px -30px rgba(23,39,44,.3);
+  --gold:#a97e1e;--gold-soft:#f8f0da;
+  display:grid;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;
+  box-shadow:0 26px 60px -36px rgba(14,90,99,.4);
 }
-.calc-controls{background:var(--ink);color:#fff;padding:clamp(26px,4vw,38px)}
-.calc-label{margin:0;font-size:.78rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#9fc4c9}
-.calc-controls .calc-label{color:rgba(255,255,255,.72)}
-.stepper{display:flex;align-items:center;gap:20px;margin:22px 0 6px}
-.stepper button{
-  width:50px;height:50px;border-radius:12px;cursor:pointer;
-  border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;
-  font-size:1.5rem;line-height:1;
-  transition:background-color .15s ease,border-color .15s ease;
+@media (min-width:920px){.calc{grid-template-columns:1.1fr .9fr}}
+.calc-controls{
+  padding:clamp(26px,4vw,42px);
+  display:flex;flex-direction:column;gap:22px;
+  background:radial-gradient(130% 100% at 100% 0%,rgba(14,90,99,.05),transparent 55%);
 }
-.stepper button:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6)}
-.stepper output{font-family:var(--serif);font-weight:700;font-size:2.7rem;line-height:1;min-width:2.4ch;text-align:center;font-variant-numeric:tabular-nums}
+.calc-label{margin:0;font-size:.76rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.stepper{display:flex;align-items:center;justify-content:center;gap:clamp(20px,3vw,32px);margin-top:14px}
+.step-btn{
+  width:48px;height:48px;border-radius:50%;cursor:pointer;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid #c6d4d6;background:#fff;color:var(--accent);
+  font-size:1.4rem;line-height:1;
+  transition:border-color .18s ease,background-color .18s ease,transform .12s ease,opacity .18s ease;
+}
+.step-btn:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.step-btn:active:not(:disabled){transform:scale(.9)}
+.step-btn:disabled{opacity:.3;cursor:default}
+.stepper output{
+  font-family:var(--serif);font-weight:700;color:var(--ink);
+  font-size:clamp(3rem,6vw,3.7rem);line-height:1;
+  min-width:2.2ch;text-align:center;font-variant-numeric:tabular-nums;
+}
+.stepper output.pop{animation:num-pop .3s cubic-bezier(.2,1.4,.4,1)}
+@keyframes num-pop{0%{transform:scale(.84);opacity:.35}100%{transform:scale(1);opacity:1}}
+.quick-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.q-chip{
+  min-width:54px;min-height:44px;padding:8px 18px;cursor:pointer;
+  border:1.5px solid var(--line);border-radius:999px;background:#fff;
+  font:inherit;font-weight:600;font-size:.97rem;color:var(--body);
+  transition:border-color .16s ease,background-color .16s ease,color .16s ease,box-shadow .16s ease,transform .12s ease;
+}
+.q-chip:hover{border-color:var(--accent);color:var(--accent)}
+.q-chip:active{transform:scale(.93)}
+.q-chip[aria-pressed=true]{
+  background:var(--accent);border-color:var(--accent);color:#fff;
+  box-shadow:0 10px 20px -10px rgba(14,90,99,.7);
+}
+.slider-wrap{margin-top:2px}
 .calc input[type=range]{
-  width:100%;margin-top:14px;appearance:none;-webkit-appearance:none;height:4px;border-radius:2px;
-  background:linear-gradient(to right,#4fb3bd var(--fill,10%),rgba(255,255,255,.22) var(--fill,10%));
-  cursor:pointer;
+  width:100%;height:30px;margin:0;appearance:none;-webkit-appearance:none;
+  background:transparent;cursor:pointer;
+}
+.calc input[type=range]::-webkit-slider-runnable-track{
+  height:8px;border-radius:999px;
+  background:linear-gradient(to right,#17727e 0%,var(--accent) var(--fill,10%),var(--line) var(--fill,10%));
 }
 .calc input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;
-  background:#fff;border:7px solid #4fb3bd;box-shadow:0 1px 6px rgba(0,0,0,.35);
+  -webkit-appearance:none;appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;
+  background:#fff;border:3px solid var(--accent);box-shadow:0 2px 10px rgba(14,90,99,.45);
+  transition:transform .15s ease,box-shadow .15s ease;
 }
-.calc input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#fff;border:7px solid #4fb3bd}
-.tier-note{margin:20px 0 0;padding-left:12px;border-left:3px solid #4fb3bd;font-size:.92rem;color:rgba(255,255,255,.85)}
-.calc-receipt{padding:clamp(26px,4vw,38px);display:flex;flex-direction:column}
-.receipt-rows{margin:18px 0 0}
-.receipt-row{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:11px 0;border-bottom:1px dashed var(--line);font-size:.95rem}
+.calc input[type=range]:hover::-webkit-slider-thumb,
+.calc input[type=range]:focus-visible::-webkit-slider-thumb{transform:scale(1.14);box-shadow:0 4px 14px rgba(14,90,99,.55)}
+.calc input[type=range]::-moz-range-track{
+  height:8px;border-radius:999px;
+  background:linear-gradient(to right,#17727e 0%,var(--accent) var(--fill,10%),var(--line) var(--fill,10%));
+}
+.calc input[type=range]::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;
+  background:#fff;border:3px solid var(--accent);box-shadow:0 2px 10px rgba(14,90,99,.45);
+}
+.range-scale{display:flex;justify-content:space-between;margin-top:6px;font-size:.74rem;font-weight:600;color:var(--muted)}
+.dots{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;padding:6px 0 0}
+.dot{
+  width:11px;height:11px;border-radius:50%;flex:none;
+  background:var(--tint);border:1.5px solid var(--line);transform:scale(.82);
+  transition:background-color .25s ease,border-color .25s ease,transform .3s cubic-bezier(.2,1.5,.4,1);
+}
+.dot.on{background:var(--accent);border-color:var(--accent);transform:scale(1)}
+.dot.on.gold{background:var(--gold);border-color:var(--gold)}
+.tier-badge{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin:auto 0 0;min-height:1em;
+  font-size:.88rem;font-weight:600;color:var(--muted);text-align:center;
+  border-radius:999px;
+}
+.tier-ic{display:none;width:16px;height:16px;flex:none}
+.tier-badge.active{
+  width:fit-content;margin-inline:auto;padding:9px 18px;
+  background:var(--gold-soft);color:var(--gold);
+  animation:badge-in .35s cubic-bezier(.2,1.4,.4,1);
+}
+.tier-badge.active .tier-ic{display:block}
+@keyframes badge-in{from{opacity:0;transform:translateY(6px) scale(.92)}to{opacity:1;transform:none}}
+.calc-receipt{
+  padding:clamp(26px,4vw,42px);display:flex;flex-direction:column;
+  background:var(--tint);border-top:1px solid var(--line);
+}
+@media (min-width:920px){.calc-receipt{border-top:0;border-left:1px solid var(--line)}}
+.receipt-rows{margin:16px 0 0}
+.receipt-row{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:11px 0;border-bottom:1px dashed #cbd9da;font-size:.94rem}
 .receipt-row dt{color:var(--body)}
 .receipt-row dd{margin:0;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right}
-.calc-total{margin-top:auto;padding-top:22px}
-.sum-label{font-size:.9rem;color:var(--muted)}
-.sum{display:block;margin-top:4px;font-family:var(--serif);font-size:clamp(2.5rem,5vw,3.3rem);font-weight:700;color:var(--ink);line-height:1.05}
-.sum.bump{animation:bump .28s ease}
-@keyframes bump{40%{transform:scale(1.05)}}
+.calc-total{margin-top:auto;padding-top:24px}
+.sum-label{font-size:.88rem;color:var(--muted)}
+.sum{display:block;margin-top:4px;font-family:var(--serif);font-size:clamp(2.6rem,5vw,3.4rem);font-weight:700;color:var(--ink);line-height:1.05;font-variant-numeric:tabular-nums}
+.sum.bump{animation:bump .28s ease;transform-origin:left bottom}
+@keyframes bump{40%{transform:scale(1.045)}}
 .sum-sub{display:block;min-height:1.5em;margin-top:6px;font-size:.9rem;font-weight:600;color:var(--ok)}
-.calc-receipt .btn{margin-top:18px}
+.btn-block{width:100%;margin-top:20px;min-height:50px}
 .calc-footnote{margin:14px 0 0;font-size:.8rem;color:var(--muted)}
-@media (min-width:820px){.calc{grid-template-columns:1.05fr .95fr}}
+@media (prefers-reduced-motion: reduce){
+  .dot,.step-btn,.q-chip{transition:none}
+  .stepper output.pop,.tier-badge.active,.sum.bump{animation:none}
+}
 .terms-grid{display:grid;gap:14px}
 .term{
   display:flex;gap:13px;align-items:flex-start;
@@ -438,7 +503,7 @@ details[open] summary{color:var(--accent)}
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <span class="kicker">Für Restaurants, Praxen, Handwerker &amp; Kanzleien</span>
+        <span class="kicker">Für jedes Unternehmen mit Google-Bewertungen</span>
         <h1>Schlechte Bewertungen müssen nicht stehen&nbsp;bleiben.</h1>
         <p class="lede">Rufklar nimmt jede Bewertung Ihres Google-Profils an – egal ob 1&nbsp;Stern ohne Text, Beleidigung oder Fake-Eintrag. Wir prüfen jeden Fall einzeln, finden den stärksten Löschungsansatz und setzen ihn bei Google durch. Abgerechnet wird erst, was tatsächlich gelöscht wurde: <strong>25&nbsp;€ pro erfolgreicher Löschung – ab der 5.&nbsp;Löschung 20&nbsp;€ pro Stück.</strong></p>
         <div class="hero-actions">
@@ -592,7 +657,7 @@ details[open] summary{color:var(--accent)}
               <th scope="col">&nbsp;</th>
               <th scope="col">Selbst bei Google melden</th>
               <th scope="col">Anwalt</th>
-              <th scope="col" class="hl"><span class="hl-badge">Empfohlen</span>Rufklar</th>
+              <th scope="col" class="hl">Rufklar</th>
             </tr>
           </thead>
           <tbody>
@@ -649,15 +714,30 @@ details[open] summary{color:var(--accent)}
       </div>
       <div class="calc" role="group" aria-label="Preisrechner">
         <div class="calc-controls">
-          <p class="calc-label" id="calc-label">Wie viele Bewertungen sollen wir übernehmen?</p>
-          <div class="stepper">
-            <button type="button" id="q-dec" aria-label="Anzahl verringern">&minus;</button>
-            <output id="q-out" for="q-range" aria-live="polite">3</output>
-            <button type="button" id="q-inc" aria-label="Anzahl erhöhen">+</button>
+          <div>
+            <p class="calc-label" id="calc-label">Wie viele Bewertungen sollen wir übernehmen?</p>
+            <div class="stepper">
+              <button type="button" class="step-btn" id="q-dec" aria-label="Anzahl verringern">&minus;</button>
+              <output id="q-out" for="q-range" aria-live="polite">3</output>
+              <button type="button" class="step-btn" id="q-inc" aria-label="Anzahl erhöhen">+</button>
+            </div>
           </div>
-          <label class="sr-only" for="q-range">Anzahl der zu meldenden Bewertungen</label>
-          <input type="range" id="q-range" min="1" max="20" step="1" value="3">
-          <p class="tier-note" id="tier-note">Ab 5 Löschungen zahlen Sie nur noch 20&nbsp;€ pro Stück.</p>
+          <div class="quick-row" role="group" aria-label="Schnellwahl Anzahl">
+            <button type="button" class="q-chip" data-n="1" aria-pressed="false">1</button>
+            <button type="button" class="q-chip" data-n="3" aria-pressed="true">3</button>
+            <button type="button" class="q-chip" data-n="5" aria-pressed="false">5</button>
+            <button type="button" class="q-chip" data-n="10" aria-pressed="false">10</button>
+          </div>
+          <div class="slider-wrap">
+            <label class="sr-only" for="q-range">Anzahl der zu meldenden Bewertungen</label>
+            <input type="range" id="q-range" min="1" max="20" step="1" value="3">
+            <div class="range-scale" aria-hidden="true"><span>1</span><span>20</span></div>
+          </div>
+          <div class="dots" id="calc-dots" aria-hidden="true"></div>
+          <p class="tier-badge" id="tier-note">
+            <svg class="tier-ic" aria-hidden="true"><use href="#ic-check"></use></svg>
+            <span id="tier-text">Ab 5 Löschungen zahlen Sie nur noch 20&nbsp;€ pro Stück.</span>
+          </p>
         </div>
         <div class="calc-receipt">
           <p class="calc-label">Ihre Kostenschätzung</p>
@@ -671,7 +751,7 @@ details[open] summary{color:var(--accent)}
             <strong class="sum" id="calc-total">75&nbsp;€</strong>
             <span class="sum-sub" id="calc-save" aria-live="polite"></span>
           </div>
-          <a class="btn btn-primary" id="calc-cta" href="#kontakt">3 Bewertungen kostenlos prüfen lassen</a>
+          <a class="btn btn-primary btn-block" id="calc-cta" href="#kontakt">3 Bewertungen kostenlos prüfen lassen</a>
           <p class="calc-footnote">Tatsächlich zahlen Sie nur für Bewertungen, die Google wirklich entfernt. Abgerechnet wird erst nach Abschluss – zahlbar innerhalb von 14&nbsp;Tagen.</p>
         </div>
       </div>
@@ -801,36 +881,69 @@ details[open] summary{color:var(--accent)}
   var calcTotal=document.getElementById('calc-total');
   var calcSave=document.getElementById('calc-save');
   var tierNote=document.getElementById('tier-note');
+  var tierText=document.getElementById('tier-text');
   var calcCta=document.getElementById('calc-cta');
+  var dotsWrap=document.getElementById('calc-dots');
   var anzahlField=document.getElementById('anzahl');
+  var reduceMotion=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function euro(n){return n.toLocaleString('de-DE')+'\u00a0€'}
+  var MAX=parseInt(qRange.max,10)||20;
+  for(var di=0;di<MAX;di++){var sp=document.createElement('span');sp.className='dot';dotsWrap.appendChild(sp)}
+  var dots=dotsWrap.children;
+  var chips=[].slice.call(document.querySelectorAll('.q-chip'));
+
+  function euro(n){return n.toLocaleString('de-DE')+'\u00a0\u20ac'}
   function unitPrice(n){return n>=5?20:25}
+
+  var shownValue=null,rafId=null,lastN=null;
+  function setTotal(target){
+    if(rafId){cancelAnimationFrame(rafId);rafId=null}
+    if(reduceMotion||shownValue===null||shownValue===target){
+      shownValue=target;calcTotal.textContent=euro(target);return;
+    }
+    var from=shownValue,start=null;
+    function step(ts){
+      if(start===null)start=ts;
+      var p=Math.min(1,(ts-start)/380),e=1-Math.pow(1-p,3);
+      shownValue=Math.round(from+(target-from)*e);
+      calcTotal.textContent=euro(shownValue);
+      if(p<1){rafId=requestAnimationFrame(step)}else{rafId=null;shownValue=target;calcTotal.textContent=euro(target)}
+    }
+    rafId=requestAnimationFrame(step);
+  }
 
   function renderCalc(){
     var n=parseInt(qRange.value,10),unit=unitPrice(n),total=n*unit;
+    if(lastN!==null&&n!==lastN){qOut.classList.remove('pop');void qOut.offsetWidth;qOut.classList.add('pop')}
+    lastN=n;
     qOut.textContent=n;
     rowCount.textContent=n;
     rowUnit.textContent=euro(unit)+' pro Stück';
-    calcTotal.textContent=euro(total);
+    setTotal(total);
     calcTotal.classList.remove('bump');void calcTotal.offsetWidth;calcTotal.classList.add('bump');
+    for(var i=0;i<MAX;i++){var on=i<n;dots[i].classList.toggle('on',on);dots[i].classList.toggle('gold',on&&i>=4)}
+    chips.forEach(function(c){c.setAttribute('aria-pressed',+c.getAttribute('data-n')===n?'true':'false')});
     if(n>=5){
       calcSave.textContent='Sie sparen '+euro(n*(25-unit))+' gegenüber dem Einzelpreis.';
-      tierNote.textContent='Preisvorteil aktiv: Ab der 5. Löschung kostet jede weitere nur noch 20\u00a0€ pro Stück.';
-    }else if(n===4){
-      calcSave.textContent='';
-      tierNote.textContent='Mit 5 Löschungen zahlen Sie ebenfalls 100\u00a0€ – die 5. wäre effektiv gratis.';
+      tierNote.classList.add('active');
+      tierText.textContent='20\u00a0€ pro Stück aktiv';
     }else{
       calcSave.textContent='';
-      tierNote.textContent='Ab 5 Löschungen zahlen Sie nur noch 20\u00a0€ pro Stück.';
+      tierNote.classList.remove('active');
+      tierText.textContent=n===4
+        ?'Mit 5 Löschungen zahlen Sie ebenfalls 100\u00a0€ – die 5. wäre effektiv gratis.'
+        :'Ab 5 Löschungen zahlen Sie nur noch 20\u00a0€ pro Stück.';
     }
     calcCta.textContent=(n===1?'1 Bewertung':n+' Bewertungen')+' kostenlos prüfen lassen';
-    qRange.style.setProperty('--fill',((n-1)/19*100)+'%');
+    qRange.style.setProperty('--fill',((n-1)/(MAX-1)*100)+'%');
+    qDec.disabled=n<=+qRange.min;
+    qInc.disabled=n>=+qRange.max;
     if(anzahlField&&document.activeElement!==anzahlField){anzahlField.value=n}
   }
   qRange.addEventListener('input',renderCalc);
   qDec.addEventListener('click',function(){if(+qRange.value>+qRange.min){qRange.value=+qRange.value-1;renderCalc()}});
   qInc.addEventListener('click',function(){if(+qRange.value<+qRange.max){qRange.value=+qRange.value+1;renderCalc()}});
+  chips.forEach(function(c){c.addEventListener('click',function(){qRange.value=c.getAttribute('data-n');renderCalc()})});
   renderCalc();
 
   /* ---------- Formular ---------- */
