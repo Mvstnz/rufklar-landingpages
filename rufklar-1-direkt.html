@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Regelwidrige Google-Bewertung? Rufklar prüft und meldet sie begründet bei Google. Sie zahlen nur bei Erfolg: 25 € pro gelöschter Bewertung, Rechnung mit 14 Tagen Zahlungsfrist.">
+<title>Rufklar – Google-Bewertung löschen lassen | Nur zahlen bei Erfolg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0b;
+    --bg2:#101013;
+    --bg3:#151519;
+    --line:#24242a;
+    --line-strong:#33333b;
+    --text:#f2f2ef;
+    --muted:#9a9aa3;
+    --accent:#00e36a;
+    --accent-dark:#04170c;
+    --accent-shadow:#0c3d21;
+    --danger:#ff5546;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    font-size:1.0625rem;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  section{scroll-margin-top:24px}
+
+  .wrap{width:min(1160px,92%);margin-inline:auto}
+
+  /* ---------- Typo-Bausteine ---------- */
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:1.1rem;
+  }
+  .eyebrow::before{
+    content:"// ";
+    color:var(--muted);
+  }
+  h1,h2{
+    font-family:'Anton',sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    line-height:1.02;
+    letter-spacing:.01em;
+  }
+  h2{font-size:clamp(1.9rem,4.6vw,3.4rem);margin-bottom:1rem}
+  .lead{color:var(--muted);font-size:clamp(1.05rem,1.8vw,1.25rem)}
+  .hl{color:var(--accent)}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:500;
+    font-size:.95rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    text-decoration:none;
+    text-align:center;
+    padding:1.05rem 1.9rem;
+    cursor:pointer;
+    border:1px solid var(--accent);
+    transition:transform .12s ease,box-shadow .12s ease,background .12s ease,color .12s ease;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:var(--accent-dark);
+  }
+  .btn-primary:hover{
+    transform:translate(-3px,-3px);
+    box-shadow:6px 6px 0 var(--accent-shadow);
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--text);
+    border-color:var(--line-strong);
+  }
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ---------- Header ---------- */
+  header.site{
+    border-bottom:1px solid var(--line);
+    background:rgba(10,10,11,.92);
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(6px);
+  }
+  .site-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.9rem 0;
+  }
+  .logo{
+    font-family:'Anton',sans-serif;
+    font-size:1.45rem;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    text-decoration:none;
+  }
+  .logo em{font-style:normal;color:var(--accent)}
+  .header-note{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.1em;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:clamp(3rem,7vw,5.5rem) 0 clamp(3rem,6vw,4.5rem);
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:100% 52px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    gap:3rem;
+    align-items:center;
+  }
+  @media(min-width:940px){
+    .hero-grid{grid-template-columns:1.15fr .85fr}
+  }
+  h1{
+    font-size:clamp(2.7rem,7.2vw,5.4rem);
+    margin-bottom:1.4rem;
+  }
+  h1 .row2{color:var(--accent)}
+  .hero-sub{
+    max-width:34em;
+    margin-bottom:1.6rem;
+  }
+  .hero-price{
+    display:inline-flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:.55em .9em;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    border:1px dashed var(--line-strong);
+    padding:.8rem 1.1rem;
+    margin-bottom:1.9rem;
+    max-width:100%;
+  }
+  .hero-price strong{color:var(--accent);font-weight:500}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:1.4rem}
+  .hero-facts{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.76rem;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.09em;
+  }
+
+  /* Review-Karte (Demo) */
+  .review-wrap{position:relative;max-width:430px;margin-inline:auto;width:100%}
+  .review-card{
+    background:var(--bg2);
+    border:1px solid var(--line-strong);
+    padding:1.4rem 1.4rem 1.2rem;
+  }
+  .review-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:1rem;
+  }
+  .review-head{display:flex;align-items:center;gap:.8rem;margin-bottom:.7rem}
+  .avatar{
+    width:42px;height:42px;border-radius:50%;
+    background:var(--bg3);
+    border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;color:var(--muted);
+    flex-shrink:0;
+  }
+  .review-name{font-weight:600;font-size:.98rem}
+  .stars{font-size:.95rem;letter-spacing:.15em;color:var(--danger)}
+  .stars .off{color:var(--line-strong)}
+  .review-text{
+    color:var(--text);
+    font-size:1.02rem;
+    text-decoration:line-through;
+    text-decoration-color:var(--accent);
+    text-decoration-thickness:2px;
+    opacity:.55;
+    margin-bottom:1rem;
+  }
+  .review-stamp{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    font-weight:500;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--accent);
+    border:2px solid var(--accent);
+    padding:.4rem .7rem;
+    transform:rotate(-4deg);
+  }
+  .review-meta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.74rem;
+    color:var(--muted);
+    margin-top:.9rem;
+  }
+  .glow{
+    position:absolute;
+    inset:auto -10% -18% -10%;
+    height:60%;
+    background:radial-gradient(closest-side,rgba(0,227,106,.14),transparent);
+    filter:blur(30px);
+    z-index:-1;
+  }
+
+  /* ---------- Ticker ---------- */
+  .ticker{
+    border-bottom:1px solid var(--line);
+    background:var(--bg2);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:.75rem 0;
+  }
+  .ticker-track{
+    display:inline-block;
+    animation:ticker 28s linear infinite;
+  }
+  .ticker span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.82rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-right:3.2rem;
+  }
+  .ticker b{color:var(--accent);font-weight:500}
+  @keyframes ticker{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .ticker-track{animation:none}
+    html{scroll-behavior:auto}
+  }
+
+  /* ---------- Sektionen allgemein ---------- */
+  .sec{padding:clamp(3.2rem,7vw,5.5rem) 0;border-bottom:1px solid var(--line)}
+  .sec-head{max-width:44em;margin-bottom:clamp(2rem,4vw,3rem)}
+
+  /* ---------- Szenarien ---------- */
+  .cases{display:grid;gap:0;border:1px solid var(--line-strong)}
+  .case{
+    padding:1.15rem 1.3rem;
+    border-bottom:1px solid var(--line);
+    display:flex;gap:1rem;align-items:baseline;
+  }
+  .case:last-child{border-bottom:none}
+  .case-x{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--danger);
+    flex-shrink:0;
+  }
+  .case p{color:var(--muted);margin:0}
+  .cases-verdict{
+    margin-top:1.4rem;
+    display:grid;gap:1rem;
+  }
+  @media(min-width:800px){.cases-verdict{grid-template-columns:1fr 1fr}}
+  .verdict-box{
+    border:1px solid var(--line-strong);
+    padding:1.3rem 1.4rem;
+    background:var(--bg2);
+  }
+  .verdict-box.yes{border-color:var(--accent-shadow)}
+  .verdict-box h3{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.8rem;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    margin-bottom:.6rem;
+    font-weight:500;
+  }
+  .verdict-box.yes h3{color:var(--accent)}
+  .verdict-box.no h3{color:var(--danger)}
+  .verdict-box p{color:var(--muted);font-size:.98rem}
+
+  /* ---------- Schritte ---------- */
+  .steps{display:grid;gap:1.2rem;counter-reset:step}
+  @media(min-width:800px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{
+    counter-increment:step;
+    border:1px solid var(--line-strong);
+    background:var(--bg2);
+    padding:1.6rem 1.5rem 1.7rem;
+    position:relative;
+  }
+  .step::before{
+    content:"0" counter(step);
+    font-family:'Anton',sans-serif;
+    font-size:2.6rem;
+    color:transparent;
+    -webkit-text-stroke:1px var(--accent);
+    display:block;
+    margin-bottom:.9rem;
+    line-height:1;
+  }
+  .step h3{
+    font-size:1.15rem;
+    font-weight:700;
+    margin-bottom:.55rem;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  .step p{color:var(--muted);font-size:.98rem}
+
+  /* ---------- Preise ---------- */
+  .price-grid{display:grid;gap:1.2rem;margin-bottom:2.6rem}
+  @media(min-width:800px){.price-grid{grid-template-columns:1fr 1fr}}
+  .plan{
+    border:1px solid var(--line-strong);
+    padding:1.8rem 1.6rem;
+    background:var(--bg2);
+    display:flex;
+    flex-direction:column;
+  }
+  .plan-hot{
+    border:2px solid var(--accent);
+    position:relative;
+  }
+  .plan-badge{
+    position:absolute;
+    top:-1px;right:-1px;
+    background:var(--accent);
+    color:var(--accent-dark);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;
+    font-weight:500;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:.35rem .7rem;
+  }
+  .plan-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:var(--muted);
+    margin-bottom:.9rem;
+  }
+  .plan-num{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(2.6rem,6vw,3.8rem);
+    line-height:1;
+    margin-bottom:.3rem;
+  }
+  .plan-num small{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1rem;
+    color:var(--muted);
+    font-weight:500;
+    display:block;
+    margin-top:.5rem;
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .plan ul{list-style:none;margin-top:1.2rem;display:grid;gap:.45rem}
+  .plan li{
+    color:var(--muted);
+    font-size:.96rem;
+    padding-left:1.4rem;
+    position:relative;
+  }
+  .plan li::before{
+    content:"+";
+    position:absolute;left:0;
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--accent);
+  }
+
+  /* ---------- Rechner ---------- */
+  .calc{
+    border:2px solid var(--accent);
+    background:var(--bg2);
+    max-width:720px;
+    margin-inline:auto;
+  }
+  .calc-head{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:var(--accent);
+    border-bottom:1px solid var(--line-strong);
+    padding:.85rem 1.4rem;
+  }
+  .calc-body{padding:1.6rem 1.4rem}
+  .calc-row{
+    display:flex;align-items:center;justify-content:center;
+    gap:1.2rem;
+    margin-bottom:1.6rem;
+  }
+  .calc-btn{
+    width:52px;height:52px;
+    background:transparent;
+    border:1px solid var(--line-strong);
+    color:var(--text);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:1.5rem;
+    cursor:pointer;
+    transition:border-color .12s ease,color .12s ease;
+    flex-shrink:0;
+  }
+  .calc-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .calc-n{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(3rem,9vw,4.6rem);
+    min-width:2.2ch;
+    text-align:center;
+    line-height:1;
+  }
+  .calc-unit{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--muted);
+    text-align:center;
+    margin-bottom:1.4rem;
+  }
+  input[type=range]{
+    width:100%;
+    appearance:none;-webkit-appearance:none;
+    height:2px;
+    background:var(--line-strong);
+    outline:none;
+    margin:0 0 .5rem;
+    cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    appearance:none;-webkit-appearance:none;
+    width:26px;height:26px;
+    background:var(--accent);
+    border:none;
+    cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:26px;height:26px;
+    background:var(--accent);
+    border:none;
+    border-radius:0;
+    cursor:pointer;
+  }
+  .range-scale{
+    display:flex;justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;
+    color:var(--muted);
+    margin-bottom:1.8rem;
+  }
+  .calc-out{text-align:center}
+  .calc-total{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(3.2rem,10vw,5.2rem);
+    line-height:1;
+    color:var(--accent);
+  }
+  .calc-breakdown{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.85rem;
+    color:var(--muted);
+    margin-top:.8rem;
+  }
+  .calc-save{
+    display:inline-block;
+    margin-top:1rem;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    font-weight:500;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    background:var(--accent);
+    color:var(--accent-dark);
+    padding:.4rem .8rem;
+  }
+  .calc-note{
+    margin-top:1.4rem;
+    padding-top:1.2rem;
+    border-top:1px dashed var(--line-strong);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    color:var(--muted);
+    text-align:center;
+    text-transform:uppercase;
+    letter-spacing:.07em;
+  }
+  .calc-note b{color:var(--text);font-weight:500}
+  [hidden]{display:none !important}
+
+  /* Vergleichszeile */
+  .compare{
+    max-width:46em;
+    margin:2.4rem auto 0;
+    color:var(--muted);
+    font-size:.99rem;
+    border-left:2px solid var(--accent);
+    padding-left:1.2rem;
+  }
+  .compare b{color:var(--text);font-weight:600}
+
+  /* ---------- Risiko ---------- */
+  .risk-grid{display:grid;gap:1.2rem}
+  @media(min-width:800px){.risk-grid{grid-template-columns:repeat(3,1fr)}}
+  .risk{
+    border:1px solid var(--line-strong);
+    background:var(--bg2);
+    padding:1.5rem 1.4rem;
+  }
+  .risk-big{
+    font-family:'Anton',sans-serif;
+    font-size:1.5rem;
+    text-transform:uppercase;
+    margin-bottom:.6rem;
+    color:var(--accent);
+    line-height:1.1;
+  }
+  .risk p{color:var(--muted);font-size:.97rem}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:760px}
+  details{
+    border:1px solid var(--line-strong);
+    border-bottom:none;
+    background:var(--bg2);
+  }
+  details:last-of-type{border-bottom:1px solid var(--line-strong)}
+  summary{
+    cursor:pointer;
+    list-style:none;
+    padding:1.15rem 1.3rem;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1rem;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{
+    content:"+";
+    font-family:'IBM Plex Mono',monospace;
+    font-size:1.3rem;
+    color:var(--accent);
+    flex-shrink:0;
+    transition:transform .15s ease;
+  }
+  details[open] summary::after{transform:rotate(45deg)}
+  details .faq-body{
+    padding:0 1.3rem 1.3rem;
+    color:var(--muted);
+    font-size:.99rem;
+  }
+  details .faq-body p+p{margin-top:.6rem}
+
+  /* ---------- Finaler CTA / Formular ---------- */
+  .final{background:var(--bg2)}
+  .final-grid{display:grid;gap:2.8rem}
+  @media(min-width:940px){
+    .final-grid{grid-template-columns:1fr 1fr;align-items:start}
+  }
+  .final h2{margin-bottom:1.2rem}
+  .final-list{list-style:none;margin:1.6rem 0 0;display:grid;gap:.8rem}
+  .final-list li{
+    padding-left:1.6rem;
+    position:relative;
+    color:var(--muted);
+  }
+  .final-list li::before{
+    content:"→";
+    position:absolute;left:0;
+    color:var(--accent);
+    font-family:'IBM Plex Mono',monospace;
+  }
+  form.order{
+    border:1px solid var(--line-strong);
+    background:var(--bg);
+    padding:1.7rem 1.5rem;
+  }
+  .field{margin-bottom:1.15rem}
+  label{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--muted);
+    margin-bottom:.45rem;
+  }
+  label .req{color:var(--accent)}
+  input[type=text],input[type=email],input[type=tel],input[type=url],select{
+    width:100%;
+    background:var(--bg3);
+    border:1px solid var(--line-strong);
+    color:var(--text);
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1rem;
+    padding:.85rem .95rem;
+    outline:none;
+    transition:border-color .12s ease;
+  }
+  input:focus,select:focus{border-color:var(--accent)}
+  select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;background-size:6px 6px;background-repeat:no-repeat}
+  .form-hint{font-size:.83rem;color:var(--muted);margin-top:.4rem}
+  form.order .btn{width:100%;margin-top:.5rem}
+  .form-status{
+    margin-top:1rem;
+    border:1px solid var(--accent);
+    padding:.9rem 1.1rem;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.84rem;
+    color:var(--accent);
+  }
+  .tiny-note{
+    font-size:.8rem;
+    color:var(--muted);
+    margin-top:.9rem;
+  }
+
+  /* ---------- Sticky Mobile Bar ---------- */
+  .sticky-bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    background:var(--bg2);
+    border-top:2px solid var(--accent);
+    padding:.75rem 1rem calc(.75rem + env(safe-area-inset-bottom));
+    transform:translateY(110%);
+    transition:transform .25s ease;
+  }
+  .sticky-bar.show{transform:translateY(0)}
+  .sticky-info{font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);line-height:1.5}
+  .sticky-info b{color:var(--text);font-weight:500}
+  .sticky-bar .btn{padding:.7rem 1.1rem;font-size:.78rem;flex-shrink:0}
+  @media(min-width:1100px){.sticky-bar{display:none}}
+
+  /* ---------- Footer ---------- */
+  footer.site-foot{
+    padding:2.2rem 0 6.5rem;
+    border-top:1px solid var(--line);
+  }
+  @media(min-width:1100px){footer.site-foot{padding-bottom:2.2rem}}
+  .foot-row{
+    display:flex;flex-wrap:wrap;gap:.6rem 2rem;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:1rem;
+  }
+  .foot-links{display:flex;gap:1.6rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+  .foot-links a{color:var(--muted);text-decoration:none}
+  .foot-links a:hover{color:var(--accent)}
+  .foot-disclaimer{
+    font-size:.82rem;
+    color:var(--muted);
+    max-width:60em;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-inner">
+    <a class="logo" href="#top">Ruf<em>klar</em></a>
+    <span class="header-note">25 € / Löschung · nur bei Erfolg</span>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Rufklar · Regelwidrige Google-Bewertungen entfernen</p>
+        <h1 id="hero-title">
+          Ihre 1-Stern-Bewertung:<br>
+          <span class="row2">Weg. Sonst kostet<br>sie nichts.</span>
+        </h1>
+        <p class="lead hero-sub">
+          Ein wütender Gast, ein Konkurrent, ein Ex-Mitarbeiter – und plötzlich hängt
+          eine 1-Stern-Rezension ganz oben auf Ihrem Google-Profil. Wir prüfen sie gegen
+          Googles eigene Richtlinien, melden sie sachlich begründet bei Google und bleiben dran,
+          bis entschieden ist.
+        </p>
+        <p class="hero-price">
+          Erfolg ist die Voraussetzung:&nbsp;<strong>25 € pro gelöschter Bewertung</strong>
+          <span aria-hidden="true">·</span> kein Erfolg = 0 €
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#auftrag">Bewertung einreichen – 2 Minuten</a>
+          <a class="btn btn-ghost" href="#ablauf">So läuft der Deal</a>
+        </div>
+        <p class="hero-facts">Keine Vorauszahlung · Kein Vertrag · Kein Abo</p>
+      </div>
+
+      <div class="review-wrap">
+        <div class="glow" aria-hidden="true"></div>
+        <article class="review-card" aria-label="Beispiel einer gemeldeten Bewertung">
+          <p class="review-tag">Beispiel · Demo-Darstellung</p>
+          <div class="review-head">
+            <span class="avatar" aria-hidden="true">G</span>
+            <div>
+              <p class="review-name">Gast_4711</p>
+              <p class="stars" aria-label="1 von 5 Sternen">★<span class="off">★★★★</span></p>
+            </div>
+          </div>
+          <p class="review-text">„Absoluter Katastrophbetrieb!!! Finger weg, Inhaber ist ein Betrüger und die Bedienung eine Idiotin. Nie wieder!“</p>
+          <span class="review-stamp">Richtlinienverstoß · gemeldet · gelöscht</span>
+          <p class="review-meta">Geprüft gegen Google-Richtlinien für Rezensionen → Beleidigung + fehlender Kundenkontakt</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span><b>Kein Erfolg</b> · keine Kosten</span>
+      <span><b>25 €</b> pro gelöschter Bewertung</span>
+      <span>Rechnung erst <b>nach</b> dem Erfolg · 14 Tage Zahlungsfrist</span>
+      <span><b>5 Löschungen = 100 €</b> statt 125 €</span>
+      <span>Heute beauftragt · morgen eingereicht</span>
+      <span><b>Kein Erfolg</b> · keine Kosten</span>
+      <span><b>25 €</b> pro gelöschter Bewertung</span>
+      <span>Rechnung erst <b>nach</b> dem Erfolg · 14 Tage Zahlungsfrist</span>
+      <span><b>5 Löschungen = 100 €</b> statt 125 €</span>
+      <span>Heute beauftragt · morgen eingereicht</span>
+    </div>
+  </div>
+
+  <!-- ============ SZENARIEN ============ -->
+  <section class="sec" aria-labelledby="faelle-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">01 · Kennen Sie einen davon?</p>
+        <h2 id="faelle-title">Diese Bewertungen stehen Ihnen viel zu sehr im Weg.</h2>
+      </div>
+
+      <div class="cases">
+        <div class="case"><span class="case-x">✕</span><p>Der Gast, der sich über die Wartezeit geärgert hat – und mit 1 Stern abzieht, ohne je ein Wort mit Ihnen geredet zu haben.</p></div>
+        <div class="case"><span class="case-x">✕</span><p>Der „zufriedene Kunde“ des Wettbewerbs, den Sie in Ihrer Praxis, Ihrem Laden, Ihrer Kanzlei noch nie gesehen haben.</p></div>
+        <div class="case"><span class="case-x">✕</span><p>Der Ex-Mitarbeiter mit einer alten Rechnung und neuem Smartphone.</p></div>
+        <div class="case"><span class="case-x">✕</span><p>Die Rezension voller Behauptungen, die schlicht nicht stimmen – inklusive Ihres Namens.</p></div>
+      </div>
+
+      <div class="cases-verdict">
+        <div class="verdict-box yes">
+          <h3>Löschbar – dagegen gehen wir vor</h3>
+          <p>Beleidigungen und Schmähkritik, Fake-Bewertungen ohne Kundenkontakt, Konkurrenz-Trolling, unwahre Tatsachenbehauptungen, Datenschutzverstöße, Spam. Alles Verstöße gegen Googles Rezensionsrichtlinien.</p>
+        </div>
+        <div class="verdict-box no">
+          <h3>Nicht löschbar – nehmen wir gar nicht erst an</h3>
+          <p>Echte Kritik von echten Kunden („Essen war kalt“, „Termin hat 20 Minuten verspätet begonnen“) ist Meinungsfreiheit. Wer Ihnen das verspricht, lügt. Wir sagen Ihnen vorher, was realistisch ist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABLAUF ============ -->
+  <section class="sec" id="ablauf" aria-labelledby="ablauf-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">02 · Der Deal</p>
+        <h2 id="ablauf-title">Drei Schritte. Kein Papierkram.</h2>
+        <p class="lead">Sie müssen weder Formulare von Google verstehen noch selbst mit deren Support schreiben. Das ist unser Teil.</p>
+      </div>
+
+      <ol class="steps" style="list-style:none">
+        <li class="step">
+          <h3>Sie schicken uns den Link</h3>
+          <p>Link zu Ihrem Google-Profil oder direkt zur betroffenen Bewertung, dazu Name und Kontakt. Über das Formular unten: 2 Minuten, keine Unterschrift, kein Rahmenvertrag.</p>
+        </li>
+        <li class="step">
+          <h3>Wir prüfen und melden</h3>
+          <p>Abgleich mit den Google-Richtlinien für Rezensionen. Bei Verstoß reichen wir eine fundierte, sachliche Beschwerde über die offiziellen Meldekanäle ein – und eskalieren nach, falls Google beim ersten Versuch abwinkt.</p>
+        </li>
+        <li class="step">
+          <h3>Gelöscht? Dann kommt die Rechnung.</h3>
+          <p>Ist die Bewertung tatsächlich verschwunden, stellen wir 25 € pro Löschung in Rechnung – Zahlungsfrist 14 Tage. Bleibt sie stehen, kostet es Sie exakt nichts.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ PREISE + RECHNER ============ -->
+  <section class="sec" id="preis" aria-labelledby="preis-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">03 · Der Preis</p>
+        <h2 id="preis-title">Ein Preis. Und nur bei Erfolg.</h2>
+        <p class="lead">Keine Stundensätze, keine Prüfungspauschale, keine „Fallbearbeitungsgebühr“. Sie zahlen pro gelöschter Bewertung – sonst nichts.</p>
+      </div>
+
+      <div class="price-grid">
+        <div class="plan">
+          <p class="plan-label">Einzelpreis</p>
+          <p class="plan-num">25 €<small>pro erfolgreich gelöschter Bewertung</small></p>
+          <ul>
+            <li>Für einzelne problematische Rezensionen</li>
+            <li>Meldung inkl. Nachfassen und Eskalation</li>
+            <li>Zahlung erst nach bestätigter Löschung</li>
+          </ul>
+        </div>
+        <div class="plan plan-hot">
+          <span class="plan-badge">Empfehlung</span>
+          <p class="plan-label">Bundle · ab 5 Bewertungen</p>
+          <p class="plan-num">100 €<small>für 5 Löschungen – 20 € pro Stück, 25&nbsp;€ gespart</small></p>
+          <ul>
+            <li>Gilt automatisch, sobald 5 Löschungen erfolgreich sind</li>
+            <li>Für Profile mit mehreren auffälligen Rezensionen – der Normalfall</li>
+            <li>Abgerechnet wird trotzdem nur, was wirklich gelöscht wurde</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Rechner -->
+      <div class="calc">
+        <p class="calc-head">Preisrechner · Anzahl betroffener Bewertungen</p>
+        <div class="calc-body">
+          <div class="calc-row">
+            <button type="button" class="calc-btn" id="qtyMinus" aria-label="Anzahl verringern">−</button>
+            <span class="calc-n" id="qtyOut" aria-hidden="true">3</span>
+            <button type="button" class="calc-btn" id="qtyPlus" aria-label="Anzahl erhöhen">+</button>
+          </div>
+          <label for="qty" class="calc-unit">Bewertungen zum Melden: <span id="qtyLabel">3</span></label>
+          <input type="range" id="qty" min="1" max="15" step="1" value="3">
+          <div class="range-scale" aria-hidden="true"><span>1</span><span>15</span></div>
+
+          <div class="calc-out" aria-live="polite">
+            <p class="calc-total" id="totalOut">75 €</p>
+            <p class="calc-breakdown" id="breakdownOut">3 × 25 € (Einzelpreis)</p>
+            <p class="calc-save" id="saveOut" hidden>Sie sparen 25 € gegenüber dem Einzelpreis</p>
+          </div>
+          <p class="calc-note"><b>Zahlen erst nach Erfolg.</b> Rechnung nach Löschung · 14 Tage Zahlungsfrist · bei Misserfolg: 0&nbsp;€</p>
+        </div>
+      </div>
+
+      <p class="compare">
+        <b>Zur Einordnung:</b> Ein anwaltlicher Löschantrag kostet je nach Kanzlei schnell mehrere
+        hundert Euro pro Bewertung – Erstberatung und Antrag werden fällig, egal wie Google entscheidet.
+        Und die simple Eigenmeldung über „Rezension melden“ wird in der Mehrzahl der Fälle automatisch
+        abgelehnt, weil ihr die Begründung fehlt. Genau diese Lücke füllen wir: begründete Meldung,
+        fester Preis, Risiko bei uns.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ RISIKO-UMKEHR ============ -->
+  <section class="sec" aria-labelledby="risiko-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">04 · Wer trägt das Risiko?</p>
+        <h2 id="risiko-title">Wir. Nicht Sie.</h2>
+      </div>
+
+      <div class="risk-grid">
+        <div class="risk">
+          <p class="risk-big">Kein Erfolg,<br>keine Kosten.</p>
+          <p>Bleibt eine Bewertung trotz Meldung online, stellen wir für sie null in Rechnung. Kein Kleingedrucktes, keine „bearbeitete Anfrage“ als Ersatzleistung.</p>
+        </div>
+        <div class="risk">
+          <p class="risk-big">Zahlen nach<br>dem Erfolg.</p>
+          <p>Die Rechnung kommt, nachdem die Bewertung weg ist – nicht vorher. Zahlungsfrist: 14 Tage. Keine Karte hinterlegen, kein Abo, kein Lastschriftmandat.</p>
+        </div>
+        <div class="risk">
+          <p class="risk-big">Keine versteckten<br>Posten.</p>
+          <p>25 € bedeuten 25 €. Keine Prüfgebühr, kein Aufschlag fürs Nachfassen, keine Umsatzsteuer-Überraschung auf separatem Blatt. Was der Rechner zeigt, gilt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="sec" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">05 · Fragen, die uns alle erreichen</p>
+        <h2 id="faq-title">Kurz beantwortet.</h2>
+      </div>
+
+      <div class="faq">
+        <details open>
+          <summary>Ist das überhaupt legal?</summary>
+          <div class="faq-body">
+            <p>Ja. Wir tricksen nicht und hacken nichts. Wir gleichen Ihre Bewertungen mit den veröffentlichten Google-Richtlinien für Rezensionen ab und melden Verstöße über die dafür vorgesehenen Melde- und Beschwerdewege – sachlich begründet statt mit dem Standard-Dropdown, dessen Meldungen Google meist automatisch ablehnt.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Wie läuft es konkret ab, nach dem Absenden des Formulars?</summary>
+          <div class="faq-body">
+            <p>Wir sichten Ihr Profil, markieren jede potenziell regelwidrige Bewertung und melden Ihnen zurück, was wir angehen. Dann reichen wir die begründeten Beschwerden ein, folgen nach und eskalieren bei Ablehnung. Sie müssen zwischendrin nichts tun – außer mal auf Ihr Profil schauen.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Was, wenn Google die Bewertung drinlässt?</summary>
+          <div class="faq-body">
+            <p>Dann ist dieser Auftrag beendet und kostet Sie 0 €. Wir sagen offen Bescheid, welche Bewertungen durchgegangen sind und welche nicht. Sie erhalten dafür keine Rechnung – das ist die Grundlage des gesamten Modells.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Wie schnell sehe ich Ergebnisse?</summary>
+          <div class="faq-body">
+            <p>Heute beauftragen, morgen eingereicht: Bei klaren Verstößen (Beleidigungen, Spam) entfernt Google Rezensionen teils binnen Stunden. Realistisch dauert das Prüfverfahren einige Tage bis rund zwei Wochen. Da Sie ohnehin erst bei Erfolg zahlen, trägt die Wartezeit kein Risiko.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Welche Bewertungen sind löschbar?</summary>
+          <div class="faq-body">
+            <p>Typische Fälle: Beleidigungen und Schmähkritik, Fake-Rezensionen ohne echten Kundenkontakt, Trolling durch Konkurrenten oder Ex-Mitarbeiter, unwahre Tatsachenbehauptungen („Inhaber ist Betrüger“), Datenschutzverstöße (etwa die Nennung von Namen oder Gesundheitsdaten ohne Einwilligung) sowie Spam und Werbung im Bewertungstext.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Warum soll ich nicht direkt zum Anwalt gehen?</summary>
+          <div class="faq-body">
+            <p>Für Schadensersatz, Abmahnungen des Verfassers oder verzwickte Einzelfälle ist eine Kanzlei der richtige Ansprechpartner. Für das Entfernen einer richtlinienwidrigen Rezension brauchen Sie das nicht: Anwaltliche Löschanträge kosten je nach Kanzlei mehrere hundert Euro pro Bewertung – zahlbar unabhängig vom Ergebnis. Bei uns zahlen Sie 25 €, und zwar nur, wenn die Bewertung weg ist.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINALER CTA ============ -->
+  <section class="sec final" id="auftrag" aria-labelledby="cta-title">
+    <div class="wrap final-grid">
+      <div>
+        <p class="eyebrow">06 · Der Anfang vom Ende Ihrer 1-Stern-Bewertung</p>
+        <h2 id="cta-title">Schicken Sie uns die Bewertung. Der Rest ist Sache von Rufklar.</h2>
+        <p class="lead">Ausfüllen, abschicken, zurücklehnen. Wir melden uns mit einer ehrlichen Einschätzung, welche Ihrer Bewertungen Chancen haben – und welche nicht.</p>
+        <ul class="final-list">
+          <li>2 Minuten Ausfüllen, kein Vertrag, keine Vorauszahlung</li>
+          <li>Kostenlose Ersteinschätzung: löschbar oder nicht</li>
+          <li>Rechnung erst nach gelöschter Bewertung, 14 Tage Zahlungsfrist</li>
+        </ul>
+      </div>
+
+      <div>
+        <form class="order" id="orderForm" action="#" method="post" novalidate>
+          <div class="field">
+            <label for="f-name">Name / Betrieb <span class="req">*</span></label>
+            <input type="text" id="f-name" name="name" autocomplete="name" required placeholder="Maria Rossi, Pizzeria Rossi">
+          </div>
+          <div class="field">
+            <label for="f-email">E-Mail <span class="req">*</span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email" required placeholder="name@betrieb.de">
+          </div>
+          <div class="field">
+            <label for="f-phone">Telefon (optional)</label>
+            <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="+49 …">
+          </div>
+          <div class="field">
+            <label for="f-maps">Google-Maps-Link Ihres Betriebs <span class="req">*</span></label>
+            <input type="url" id="f-maps" name="maps" required placeholder="https://maps.google.com/…">
+            <p class="form-hint">In Google Maps Ihren Betrieb suchen, Teilen → Link kopieren.</p>
+          </div>
+          <div class="field">
+            <label for="f-count">Betroffene Bewertungen (grobe Anzahl)</label>
+            <select id="f-count" name="count">
+              <option value="1">1</option>
+              <option value="2-4">2–4</option>
+              <option value="5+" selected>5 oder mehr</option>
+              <option value="unsicher">Noch unsicher</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Auftrag starten – zahlen erst bei Erfolg</button>
+          <p class="tiny-note" id="formHint">Beim Absenden öffnet sich Ihre E-Mail-App mit einer fertigen Nachricht an unser Team. Alternativ: <a href="mailto:auftrag@rufklar.de">auftrag@rufklar.de</a>.</p>
+          <div class="form-status" id="formStatus" role="status" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ STICKY BAR (mobil) ============ -->
+<div class="sticky-bar" id="stickyBar">
+  <p class="sticky-info"><b>25 € / Löschung</b><br>nur bei Erfolg · 14 Tage Zahlungsfrist</p>
+  <a class="btn btn-primary" href="#auftrag">Deal starten</a>
+</div>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-row">
+      <a class="logo" href="#top">Ruf<em>klar</em></a>
+      <nav class="foot-links" aria-label="Rechtliches">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="mailto:auftrag@rufklar.de">Kontakt</a>
+      </nav>
+    </div>
+    <p class="foot-disclaimer">
+      © 2026 Rufklar. Rufklar bietet keine Rechtsberatung und ersetzt keine anwaltliche Beratung.
+      Wir prüfen Bewertungen gegen die veröffentlichten Google-Richtlinien und nutzen die offiziellen
+      Melde- und Beschwerdewege von Google. Eine Löschung kann nicht garantiert werden – deshalb zahlen
+      Sie nur bei Erfolg.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Preisrechner ----------
+     Logik: Preis = 25 € pro Bewertung.
+     Ab 5 greift automatisch die Bundle-Staffel:
+     Preis = floor(n/5) * 100 € + (n mod 5) * 25 €            */
+  var qty   = document.getElementById("qty");
+  var minus = document.getElementById("qtyMinus");
+  var plus  = document.getElementById("qtyPlus");
+  var qtyOut       = document.getElementById("qtyOut");
+  var qtyLabel     = document.getElementById("qtyLabel");
+  var totalOut     = document.getElementById("totalOut");
+  var breakdownOut = document.getElementById("breakdownOut");
+  var saveOut      = document.getElementById("saveOut");
+
+  function eur(n){
+    return new Intl.NumberFormat("de-DE").format(n) + " \u20AC";
+  }
+
+  function calc(){
+    var n = parseInt(qty.value, 10);
+    var bundles = Math.floor(n / 5);
+    var rest    = n % 5;
+    var total   = bundles * 100 + rest * 25;
+    var full    = n * 25;
+    var saved   = full - total;
+
+    var parts = [];
+    if (bundles > 0) { parts.push(bundles + "\u00D7 5er-Bundle (= 100 \u20AC \u2192 20 \u20AC/St\u00FCck)"); }
+    if (rest > 0)    { parts.push(rest  + "\u00D7 Einzelpreis (25 \u20AC)"); }
+
+    qtyOut.textContent   = n;
+    qtyLabel.textContent = n;
+    totalOut.textContent = eur(total);
+    breakdownOut.textContent = parts.join("  +  ");
+
+    if (saved > 0) {
+      saveOut.hidden = false;
+      saveOut.textContent = "Sie sparen " + eur(saved) + " gegen\u00FCber dem Einzelpreis";
+    } else {
+      saveOut.hidden = true;
+    }
+  }
+
+  qty.addEventListener("input", calc);
+  minus.addEventListener("click", function(){
+    qty.value = Math.max(parseInt(qty.min, 10), parseInt(qty.value, 10) - 1);
+    calc();
+  });
+  plus.addEventListener("click", function(){
+    qty.value = Math.min(parseInt(qty.max, 10), parseInt(qty.value, 10) + 1);
+    calc();
+  });
+  calc();
+
+  /* ---------- Sticky Bar ein-/ausblenden ---------- */
+  var hero  = document.getElementById("hero");
+  var bar   = document.getElementById("stickyBar");
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        bar.classList.toggle("show", !e.isIntersecting);
+      });
+    }, { rootMargin: "-80px 0px 0px 0px" }).observe(hero);
+  }
+
+  /* ---------- Formular -> Mailto-Vorlage ---------- */
+  var form = document.getElementById("orderForm");
+  var status = document.getElementById("formStatus");
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    status.hidden = true;
+
+    var name  = document.getElementById("f-name").value.trim();
+    var email = document.getElementById("f-email").value.trim();
+    var phone = document.getElementById("f-phone").value.trim();
+    var maps  = document.getElementById("f-maps").value.trim();
+    var count = document.getElementById("f-count").value;
+
+    if (!name || !email || !maps) {
+      status.hidden = false;
+      status.style.borderColor = "#ff5546";
+      status.style.color = "#ff5546";
+      status.textContent = "// Bitte Name, E-Mail und Google-Maps-Link ausfüllen.";
+      return;
+    }
+
+    var subject = "Neuer Rufklar-Auftrag \u2013 " + name;
+    var body =
+      "Name/Betrieb: " + name + "\n" +
+      "E-Mail: " + email + "\n" +
+      "Telefon: " + (phone || "-") + "\n" +
+      "Google-Maps-Link: " + maps + "\n" +
+      "Betroffene Bewertungen: " + count + "\n\n" +
+      "(Gesendet ueber das Rufklar-Formular \u2013 bitte um Ersteinschaetzung.)";
+
+    window.location.href = "mailto:auftrag@rufklar.de" +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+
+    status.hidden = false;
+    status.style.borderColor = "";
+    status.style.color = "";
+    status.textContent = "// Fast fertig: Ihre E-Mail-App sollte sich gerade mit einer fertigen Nachricht öffnen. Bitte nur noch absenden.";
+  });
+})();
+</script>
+
+</body>
+</html>

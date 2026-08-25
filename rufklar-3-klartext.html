@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Rufklar prüft negative Google-Bewertungen gegen die Richtlinien und meldet sie konsequent. 25 € pro erfolgreicher Löschung – zahlen erst nach Erfolg. Für Restaurants, Praxen, Werkstätten und Läden.">
+<title>Rufklar – Der eine Stern muss nicht bleiben</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f0e4;
+    --paper-deep:#efe7d6;
+    --card:#fffdf6;
+    --ink:#241e14;
+    --ink-soft:#6b6050;
+    --accent:#a83a17;
+    --gold:#c98f2b;
+    --line:#d8ccb4;
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"Instrument Sans", "Segoe UI", sans-serif;
+    --mono:"Cascadia Mono", "Consolas", monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:1.0625rem;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.55), transparent 55%);
+    z-index:0;
+  }
+  main, header, footer{position:relative;z-index:1}
+
+  .wrap{max-width:44rem;margin-inline:auto;padding-inline:1.35rem}
+  .wrap-wide{max-width:52rem;margin-inline:auto;padding-inline:1.35rem}
+
+  /* ---------- Header ---------- */
+  .top{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-block:1.4rem;
+  }
+  .brand{
+    font-family:var(--serif);font-weight:700;font-size:1.25rem;
+    letter-spacing:.01em;text-decoration:none;color:var(--ink);
+  }
+  .brand em{color:var(--accent);font-style:normal}
+  .top-note{
+    font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding-block:2.2rem 3.2rem}
+  .hero-kicker{
+    font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:1.4rem;
+  }
+  h1{
+    font-family:var(--serif);
+    font-weight:640;
+    font-size:clamp(2.5rem, 8.5vw, 4.4rem);
+    line-height:1.04;
+    letter-spacing:-.015em;
+    margin-bottom:1.6rem;
+    text-wrap:balance;
+  }
+  .hero p.lede{font-size:clamp(1.1rem, 2.6vw, 1.28rem);line-height:1.62}
+  .hero p + p{margin-top:1.1rem}
+  .hero .wendung{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:560;
+    font-size:clamp(1.35rem, 3.4vw, 1.75rem);
+    color:var(--accent);
+    margin-top:1.8rem;
+  }
+
+  .stars{display:flex;align-items:center;gap:1.2rem;margin-top:2.4rem;flex-wrap:wrap}
+  .stars figcaption{
+    font-family:var(--serif);font-style:italic;
+    color:var(--ink-soft);font-size:.98rem;max-width:16rem;line-height:1.45;
+  }
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.4rem}
+  .btn{
+    display:inline-block;
+    background:var(--ink);color:var(--paper);
+    text-decoration:none;font-weight:600;font-size:1rem;
+    padding:.95rem 1.6rem;border-radius:3px;border:none;cursor:pointer;
+    transition:background .15s ease;
+  }
+  .btn:hover,.btn:focus-visible{background:var(--accent)}
+  .btn-ghost{
+    background:transparent;color:var(--ink);
+    border:1.5px solid var(--ink);
+    padding:.83rem 1.48rem;
+  }
+  .btn-ghost:hover,.btn-ghost:focus-visible{background:transparent;color:var(--accent);border-color:var(--accent)}
+  :is(a,button,summary,input):focus-visible{outline:2.5px solid var(--accent);outline-offset:3px}
+
+  /* ---------- Sections ---------- */
+  section{padding-block:3.4rem;border-top:1px solid var(--line)}
+  .sec-label{
+    display:flex;align-items:baseline;gap:.85rem;
+    margin-bottom:1.5rem;
+  }
+  .sec-label .num{
+    font-family:var(--serif);font-style:italic;font-weight:500;
+    color:var(--accent);font-size:1.05rem;
+  }
+  .sec-label .rule{flex:1;height:1px;background:var(--line);transform:translateY(-4px)}
+  .sec-label .tag{
+    font-size:.76rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  h2{
+    font-family:var(--serif);font-weight:620;
+    font-size:clamp(1.75rem, 5vw, 2.5rem);
+    line-height:1.12;letter-spacing:-.01em;
+    margin-bottom:1.4rem;text-wrap:balance;
+  }
+  section p + p{margin-top:1.1rem}
+  .soft{color:var(--ink-soft)}
+
+  /* Steps */
+  .steps{
+    list-style:none;margin-top:2rem;
+    counter-reset:schritt;
+  }
+  .steps li{
+    counter-increment:schritt;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:1.1rem;
+    padding-block:1.4rem;
+    border-top:1px solid var(--line);
+  }
+  .steps li::before{
+    content:counter(schritt);
+    font-family:var(--serif);font-style:italic;font-weight:500;
+    font-size:2.1rem;line-height:1;color:var(--accent);
+    min-width:1.6rem;
+  }
+  .steps li strong{font-weight:650}
+  .steps li p{margin-top:.35rem}
+
+  /* Pull quote */
+  .pull{
+    position:relative;
+    margin-block:3.2rem 1rem;
+    padding-left:2.6rem;
+  }
+  .pull::before{
+    content:"„";
+    position:absolute;left:-.4rem;top:-2.2rem;
+    font-family:var(--serif);font-weight:700;
+    font-size:7rem;line-height:1;color:var(--accent);
+    opacity:.28;
+  }
+  .pull p{
+    font-family:var(--serif);font-style:italic;font-weight:520;
+    font-size:clamp(1.35rem, 3.6vw, 1.8rem);
+    line-height:1.4;text-wrap:balance;
+  }
+  .pull .src{
+    display:block;margin-top:1rem;
+    font-family:var(--sans);font-style:normal;font-size:.82rem;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
+  }
+
+  /* Receipt */
+  .price-flow{margin-top:2.2rem;display:grid;gap:2.2rem}
+  @media (min-width:680px){
+    .price-flow{grid-template-columns:minmax(0,1fr) auto;align-items:start}
+  }
+  .receipt{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-bottom:none;
+    padding:1.5rem 1.4rem 1.7rem;
+    font-family:var(--mono);
+    font-size:.88rem;
+    line-height:1.5;
+    max-width:23rem;
+    justify-self:start;
+    transform:rotate(-1deg);
+    box-shadow:0 10px 24px -14px rgba(36,30,20,.35);
+  }
+  .receipt::after{
+    content:"";
+    position:absolute;left:-1px;right:-1px;bottom:-11px;height:11px;
+    background-image:
+      linear-gradient(135deg, var(--card) 50%, transparent 50%),
+      linear-gradient(225deg, var(--card) 50%, transparent 50%);
+    background-size:12px 12px;
+    filter:drop-shadow(0 2px 1px rgba(36,30,20,.08));
+  }
+  .receipt .r-head{
+    font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    text-align:center;padding-bottom:.8rem;margin-bottom:.8rem;
+    border-bottom:1px dashed var(--line);
+  }
+  .receipt .r-row{display:flex;align-items:baseline;gap:.5rem;padding-block:.22rem}
+  .receipt .dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px)}
+  .receipt .r-sum{border-top:1px dashed var(--line);margin-top:.7rem;padding-top:.7rem}
+  .receipt .r-big{font-weight:700}
+  .receipt .r-sub{padding-left:1.4rem;color:var(--ink-soft)}
+  .receipt .r-foot{
+    margin-top:.9rem;padding-top:.7rem;border-top:1px dashed var(--line);
+    font-size:.78rem;color:var(--ink-soft);text-align:center;
+  }
+  .receipt-cap{
+    font-family:var(--serif);font-style:italic;color:var(--ink-soft);
+    font-size:.92rem;margin-top:1.6rem;max-width:23rem;
+  }
+
+  /* Nicht-machen */
+  .niet{list-style:none;margin-top:1.8rem}
+  .niet li{padding-block:1.35rem;border-top:1px solid var(--line)}
+  .niet strong{
+    display:block;font-family:var(--serif);font-weight:640;
+    font-size:1.25rem;margin-bottom:.35rem;
+  }
+
+  /* FAQ */
+  .faq{margin-top:.6rem}
+  .faq details{border-top:1px solid var(--line)}
+  .faq details:last-child{border-bottom:1px solid var(--line)}
+  .faq summary{
+    cursor:pointer;list-style:none;
+    display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+    padding-block:1.15rem;
+    font-family:var(--serif);font-weight:600;font-size:1.12rem;line-height:1.35;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{
+    content:"+";
+    font-family:var(--sans);font-weight:400;font-size:1.5rem;line-height:1;
+    color:var(--accent);flex-shrink:0;transition:transform .2s ease;
+  }
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details > div{padding-bottom:1.3rem;max-width:38rem}
+
+  /* Auftrag */
+  .auftrag-box{
+    background:var(--paper-deep);
+    border:1px solid var(--line);
+    padding:2rem 1.4rem;
+    margin-top:2rem;
+  }
+  @media (min-width:680px){.auftrag-box{padding:2.4rem 2.6rem}}
+  .field{margin-bottom:1.15rem}
+  label{
+    display:block;font-weight:600;font-size:.92rem;margin-bottom:.35rem;
+  }
+  input[type="text"],input[type="url"]{
+    width:100%;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:.8rem .9rem;
+    font:inherit;color:var(--ink);
+  }
+  input::placeholder{color:#a89a83}
+  .fine{
+    font-size:.85rem;color:var(--ink-soft);margin-top:1rem;
+  }
+  .danke{
+    font-family:var(--serif);font-size:1.2rem;font-style:italic;
+    color:var(--accent);
+  }
+
+  /* Footer */
+  footer{
+    border-top:1px solid var(--line);
+    padding-block:2.2rem 3rem;
+    font-size:.85rem;color:var(--ink-soft);
+  }
+  footer .f-row{display:flex;flex-wrap:wrap;gap:.4rem 1.5rem}
+</style>
+</head>
+<body>
+
+<header class="wrap-wide">
+  <div class="top">
+    <a class="brand" href="#">Ruf<em>klar</em></a>
+    <span class="top-note">Klartext für den Laden um die Ecke</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ========== 1 · Geschichte ========== -->
+  <section class="hero wrap-wide" aria-labelledby="titel" style="border-top:none">
+    <p class="hero-kicker">Rufklar · Negative Google-Bewertungen, sauber entfernt</p>
+    <h1 id="titel">Dienstagmittag, halb&nbsp;eins.<br>Der Laden ist voll.</h1>
+    <div class="wrap" style="padding-inline:0">
+      <p class="lede">
+        Die Terrasse ist besetzt, in der Küche wird gerufen, an Tisch vier wartet die Nachspeise.
+        Dann hält einer der Kellner Ihnen sein Handy hin: „Chef, schauen Sie mal bei Google.“
+      </p>
+      <p class="lede">
+        Und da steht er. Ein Stern. Ganz oben – als Erstes sieht man ihn. Geschrieben von einem Konto
+        ohne Namen, ohne Foto, ohne Text. Von jemandem, der bei Ihnen noch nie gegessen hat.
+      </p>
+      <p>
+        Vielleicht ist es der Herr, dessen Parkplatzärger Sie vor einem Jahr noch persönlich geklärt
+        haben. Vielleicht die Servicekraft, die im Frühjahr gegangen ist. Vielleicht der Laden zwei
+        Straßen weiter. Oft erfährt man es nie. Wichtig ist nur das Andere:
+      </p>
+      <p class="wendung">Das muss nicht dableiben.</p>
+    </div>
+
+    <figure class="stars" aria-hidden="true">
+      <svg width="230" height="52" viewBox="0 0 262 52" role="img" aria-hidden="true">
+        <defs>
+          <path id="st" d="M0,-16 L4.7,-5.4 16,-4.6 7.6,3.3 10,14.6 0,8.7 -10,14.6 -7.6,3.3 -16,-4.6 -4.7,-5.4 Z"/>
+        </defs>
+        <g transform="translate(26,27)" fill="#c98f2b"><use href="#st"/></g>
+        <g transform="translate(78,27)" fill="#c98f2b"><use href="#st"/></g>
+        <g transform="translate(130,27)" fill="#c98f2b"><use href="#st"/></g>
+        <g transform="translate(182,27)" fill="#c98f2b"><use href="#st"/></g>
+        <g transform="translate(234,27)">
+          <use href="#st" fill="none" stroke="#a83a17" stroke-width="2.6" stroke-linejoin="round"/>
+          <line x1="-19" y1="-19" x2="19" y2="19" stroke="#a83a17" stroke-width="2.6" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <figcaption>Vier Sterne, zehn Jahre Arbeit. Der fünfte von links: fünf Sekunden, anonym.</figcaption>
+    </figure>
+
+    <div class="cta-row">
+      <a class="btn" href="#auftrag">Bewertung prüfen lassen</a>
+      <a class="btn btn-ghost" href="#preis">So wird abgerechnet</a>
+    </div>
+  </section>
+
+  <!-- ========== 2 · Was wir machen ========== -->
+  <section class="wrap" aria-labelledby="s-machen">
+    <div class="sec-label"><span class="num">01</span><span class="rule"></span><span class="tag">Der Job</span></div>
+    <h2 id="s-machen">Was wir machen.</h2>
+    <p>
+      Wir lesen jede negative Bewertung in Ihrem Profil und legen sie neben die Richtlinien von
+      Google. Denn vieles, was da steht, darf da gar nicht stehen: Beiträge von Leuten, die nie
+      Kunde waren. Rezensionen ohne jeden Bezug zu Ihrem Geschäft. Beleidigungen. Konkurrenz, die
+      sich als Gast verkleidet. All das ist löschbar – wenn man es richtig beanstandet. Wir
+      formulieren die Beanstandung so, dass Google sie nicht beiseitelegen, sondern bearbeiten
+      muss. Keine Tricks, keine gekauften Sterne. Aktenarbeit mit Begründung.
+    </p>
+    <p class="soft">Und so läuft es:</p>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Sie schicken uns den Link.</strong>
+          <p>Zu Ihrem Google-Profil, über das Formular unten. Mehr brauchen wir nicht – kein
+          Zugang, kein Passwort, kein Termin.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Wir prüfen.</strong>
+          <p>Jede negative Bewertung, Satz für Satz, gegen die Regeln, die Google sich selbst
+          gegeben hat. Bis morgen früh wissen Sie, was regelwidrig ist und was voraussichtlich
+          bleiben wird.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Wir beanstanden – und bleiben dran.</strong>
+          <p>Bei Google, sachlich begründet, bis entschieden ist. Sie bekommen jedes Ergebnis,
+          ohne dass Sie irgendwo nachfragen müssten.</p>
+        </div>
+      </li>
+    </ol>
+
+    <blockquote class="pull">
+      <p>Für einen Stern im Restaurantführer arbeiten Köche ein Leben lang. Einen Ein-Stern unten im Profil
+      sammelt man in fünf Minuten – und schlept ihn jahrelang mit sich herum.</p>
+      <span class="src">Warum sich die eine Bewertung lohnt</span>
+    </blockquote>
+  </section>
+
+  <!-- ========== 3 · Der Preis ========== -->
+  <section class="wrap" aria-labelledby="s-preis" id="preis">
+    <div class="sec-label"><span class="num">02</span><span class="rule"></span><span class="tag">Abrechnung</span></div>
+    <h2 id="s-preis">Der Preis, ehrlich gerechnet.</h2>
+    <div class="price-flow">
+      <div>
+        <p>
+          Sie zahlen <strong>25&nbsp;€ pro Bewertung, die wirklich weg ist.</strong> Nicht pro
+          Versuch. Nicht fürs Anschauen. Und nicht für eine „Analyse“, die am Ende ein PDF ist.
+          Weg heißt: weg aus dem Profil. Bleibt die Bewertung stehen, zahlen Sie nichts.
+        </p>
+        <p>
+          Das Bundle lohnt sich, sobald mehr als eine Bewertung drin ist: Fünf Löschungen kosten
+          100&nbsp;€ statt 125&nbsp;€. Rechnen wir nach: 20&nbsp;€ pro Stück, 25&nbsp;€ gespart.
+          Das ist die gesamte Preislogik.
+        </p>
+        <p>
+          Und die Reihenfolge ist fest: Erst kommt die Löschung, dann kommt die Rechnung –
+          mit vierzehn Tagen Zahlungsfrist. Löscht Google nicht, stellen wir nichts in Rechnung.
+          Dieses Risiko tragen wir freiwillig, weil wir die Spielregeln gut genug kennen.
+        </p>
+      </div>
+      <div>
+        <div class="receipt" role="img" aria-label="Beispielrechnung: Einzelpreis 25 Euro, 5 Löschungen 100 Euro, je Stück 20 Euro, Ersparnis 25 Euro, keine Löschung 0 Euro, Zahlungsziel 14 Tage nach Erfolg">
+          <div class="r-head">Rufklar · Rechnung</div>
+          <div class="r-row"><span>1 Löschung</span><span class="dots"></span><span class="r-big">25&nbsp;€</span></div>
+          <div class="r-row"><span>5 Löschungen</span><span class="dots"></span><span class="r-big">100&nbsp;€</span></div>
+          <div class="r-row r-sub"><span>davon je Stück</span><span class="dots"></span><span>20&nbsp;€</span></div>
+          <div class="r-row r-sub"><span>Ersparnis</span><span class="dots"></span><span>25&nbsp;€</span></div>
+          <div class="r-row r-sum"><span>Keine Löschung</span><span class="dots"></span><span class="r-big">0&nbsp;€</span></div>
+          <div class="r-foot">Zahlbar: 14 Tage nach erfolgter Löschung</div>
+        </div>
+        <p class="receipt-cap">Beispielrechnung. Abgerechnet wird am Ende, nachgezählt wird gemeinsam.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4 · Was wir nicht machen ========== -->
+  <section class="wrap" aria-labelledby="s-nicht">
+    <div class="sec-label"><span class="num">03</span><span class="rule"></span><span class="tag">Die Grenze</span></div>
+    <h2 id="s-nicht">Was wir nicht machen.</h2>
+    <p>
+      Ein Abschnitt zur Ehrlichkeit, weil ihm auf diesem Feld sonst kaum jemand Raum gibt.
+    </p>
+    <ul class="niet">
+      <li>
+        <strong>Keine Fake-Bewertungen.</strong>
+        Wir schreiben niemandem Sterne ins Profil und organisieren auch keine. Wir räumen auf,
+        wir dekorieren nicht. Gekaufte Bewertungen verstoßen ohnehin gegen Googles Regeln – und
+        fliegen am Ende samt dem Profil ab.
+      </li>
+      <li>
+        <strong>Keine Vollgarantie.</strong>
+        Manche Bewertung darf bleiben. Eine harte, aber ehrliche Kritik eines echten Gastes ist
+        Meinung, und Meinung hat dort Platz. Wir sagen Ihnen vorher, was wir für löschbar halten
+        und was nicht. Wer Ihnen garantiert, dass alles verschwindet, sagt nicht die Wahrheit.
+      </li>
+      <li>
+        <strong>Keine Anwaltskanzlei.</strong>
+        Wir kennen Googles Richtlinien und den Weg zu Google. Wenn es um Unterlassungserklärungen
+        oder Schadensersatz geht, ist ein Anwalt der richtige Ansprechpartner – und wir sagen
+        Ihnen offen, wann dieser Punkt erreicht ist.
+      </li>
+    </ul>
+  </section>
+
+  <!-- ========== 5 · FAQ ========== -->
+  <section class="wrap" aria-labelledby="s-faq">
+    <div class="sec-label"><span class="num">04</span><span class="rule"></span><span class="tag">Nachfragen</span></div>
+    <h2 id="s-faq">Fragen, die immer kommen.</h2>
+    <div class="faq">
+      <details>
+        <summary>Ich habe die Bewertung schon selbst gemeldet. Warum passiert da nichts?</summary>
+        <div>
+          <p>Weil das kleine Meldeformular nur Auswahlfelder kennt und keine Begründung verlangt.
+          Eine Meldung ohne Begründung liest bei Google schlicht niemand. Seit dem Digital
+          Services Act müssen allerdings ordentlich begründete Beanstandungen bearbeitet werden –
+          genau an dieser Stelle setzen wir an.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Kann ich eine fremde Bewertung nicht einfach löschen?</summary>
+        <div>
+          <p>Löschen kann nur Google selbst – oder der Verfasser. Aber Google muss Beiträge
+          entfernen, die gegen die eigenen Richtlinien verstoßen. Unsere Arbeit besteht darin,
+          diesen Verstoß sauber und unübersehbar darzulegen.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Was, wenn der Bewerter doch mal Kunde war?</summary>
+        <div>
+          <p>Dann wird es schwieriger, und wir sagen Ihnen das vorab. Ohne echten Besuch ist die
+          Sache meist klar; mit Besuch zählt, was geschrieben wurde. Beleidigungen und
+          Tatsachenbehauptungen, die nicht stimmen, bleiben angreifbar. Reine Geschmacksfragen
+          nicht.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Soll ich unter der Bewertung etwas antworten?</summary>
+        <div>
+          <p>Solange wir daran arbeiten: lieber nicht. Ein vorschnelles „Es tut uns leid“
+          gegenüber jemandem, der nie Gast war, kann eine Löschung unmöglich machen. Wir sagen
+          Ihnen, wann eine Antwort sinnvoll ist und wie sie klingen sollte.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Wie lange dauert das?</summary>
+        <div>
+          <p>Die Prüfung haben Sie bis morgen früh. Danach entscheidet Google – manchmal in
+          wenigen Tagen, manchmal in einigen Wochen. Der Verfasser kann einer Löschung außerdem
+          eine Weile widersprechen; deshalb behalten wir jeden Fall im Blick, bis er endgültig
+          durch ist.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Und wenn die Bewertung später wiederkommt?</summary>
+        <div>
+          <p>In der Widerspruchsfrist behalten wir den Fall im Auge. Käme eine Bewertung in dieser
+          Zeit zurück, zählt sie für uns als nicht gelöscht – und die Rechnung entsprechend nicht.
+          Danach gilt der Fall als abgeschlossen.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========== 6 · Angebot ========== -->
+  <section class="wrap-wide" aria-labelledby="s-angebot" id="auftrag">
+    <div class="sec-label"><span class="num">05</span><span class="rule"></span><span class="tag">Der nächste Schritt</span></div>
+    <h2 id="s-angebot">Schicken Sie uns den Link zu Ihrem Google-Profil.</h2>
+    <div class="wrap" style="padding-inline:0">
+      <p>
+        Mehr brauchen wir nicht. Bis morgen früh wissen Sie, welche Ihrer Bewertungen regelwidrig
+        sind und was sich daraus machen lässt. Die Prüfung kostet nichts – bezahlt wird erst,
+        wenn etwas weg ist.
+      </p>
+    </div>
+    <div class="auftrag-box">
+      <form id="lead" action="#" method="post" novalidate="">
+        <div class="field">
+          <label for="f-name">Ihr Name</label>
+          <input type="text" id="f-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-kontakt">E-Mail oder Telefon</label>
+          <input type="text" id="f-kontakt" name="kontakt" required>
+        </div>
+        <div class="field">
+          <label for="f-profil">Link zu Ihrem Google-Profil</label>
+          <input type="url" id="f-profil" name="profil" placeholder="https://maps.google.com/…" required>
+        </div>
+        <button class="btn" type="submit">Abschicken</button>
+        <p class="fine">Unverbindlich. Die Prüfung ist kostenlos – Rechnung gibt es erst nach Erfolg.</p>
+      </form>
+      <p class="danke" id="danke" hidden>
+        Danke. Wir sehen uns Ihr Profil an und melden uns bis morgen früh – über den Weg, den Sie
+        angegeben haben.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap-wide f-row">
+    <span>© 2026 Rufklar</span>
+    <span>Musterstraße 12 · 12345 Berlin (Impressum folgt)</span>
+    <span>Rufklar erbringt keine Rechtsberatung.</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("lead").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!this.reportValidity()) return;
+    this.hidden = true;
+    document.getElementById("danke").hidden = false;
+  });
+</script>
+</body>
+</html>
