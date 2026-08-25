@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>document.documentElement.classList.add('js')</script>
 <title>Rufklar – Schlechte Google-Bewertungen löschen lassen</title>
-<meta name="description" content="Rufklar nimmt jede negative Google-Bewertung an – von 1 Stern ohne Text bis zur Beleidigung. 25 € pro erfolgreicher Löschung, ab der 5. Löschung 20 € pro Stück. Rechnung erst nach Erfolg.">
+<meta name="description" content="Rufklar entfernt Ihre negativen Google-Bewertungen. Nur 25 € pro erfolgreicher Löschung, ab der 5. nur 20 €. Kein Erfolg, keine Kosten.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -94,9 +94,10 @@ h2{font-size:clamp(1.65rem,3.2vw,2.35rem);line-height:1.18;letter-spacing:-.01em
 .hero h1{font-size:clamp(2.05rem,5vw,3.3rem);line-height:1.12;letter-spacing:-.015em;margin-bottom:22px}
 .hero .lede{font-size:1.12rem;line-height:1.6;margin:0 0 30px;max-width:34em}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:30px}
-.trust-row{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:.9rem;font-weight:500;color:var(--muted)}
-.trust-row span{display:inline-flex;align-items:center;gap:8px}
-.trust-row svg{width:16px;height:16px;color:var(--ok)}
+.trust-strip{padding-block:18px;border-top:1px solid var(--line);background:var(--white)}
+.trust-strip ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px}
+.trust-strip li{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:500;color:var(--muted)}
+.trust-strip svg{width:16px;height:16px;color:var(--ok)}
 
 /* Review-Mockup */
 .hero-visual{position:relative;display:flex;justify-content:center}
@@ -488,11 +489,11 @@ details[open] summary{color:var(--accent)}
     </a>
     <nav class="header-nav" aria-label="Hauptnavigation">
       <a href="#ablauf">Ablauf</a>
-      <a href="#vergleich">Vergleich</a>
       <a href="#preise">Preise</a>
+      <a href="#vergleich">Vergleich</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-primary btn-sm" href="#kontakt">Prüfung anfragen</a>
+    <a class="btn btn-primary btn-sm" href="#kontakt">Kostenlos prüfen lassen</a>
   </div>
 </header>
 
@@ -504,16 +505,11 @@ details[open] summary{color:var(--accent)}
       <div>
         <span class="kicker">Für jedes Unternehmen mit Google-Bewertungen</span>
         <h1>Schlechte Bewertungen müssen<br>nicht stehen&nbsp;bleiben.</h1>
-        <p class="lede"><strong>Rufklar</strong> nimmt jede Bewertung Ihres Google-Profils an – egal ob 1&nbsp;Stern ohne Text, Beleidigung oder Fake-Eintrag. Wir prüfen jeden Fall einzeln, finden den stärksten Löschungsansatz und setzen ihn bei Google durch. Abgerechnet wird erst, was tatsächlich gelöscht wurde: <strong>25&nbsp;€ pro erfolgreicher Löschung – ab der 5.&nbsp;Löschung 20&nbsp;€ pro Stück.</strong></p>
+        <p class="lede"><strong>Rufklar</strong> entfernt Ihre negativen Google-Bewertungen. Sie zahlen nur für Erfolg: <strong>25&nbsp;€ pro Löschung, ab der 5. nur 20&nbsp;€.</strong></p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#kontakt">Bewertung kostenlos prüfen lassen</a>
+          <a class="btn btn-primary" href="#kontakt">Kostenlos prüfen lassen</a>
           <a class="btn btn-ghost" href="#ablauf">So funktioniert es</a>
         </div>
-        <p class="trust-row">
-          <span><svg aria-hidden="true"><use href="#ic-check"></use></svg>Kein Erfolg, keine Kosten</span>
-          <span><svg aria-hidden="true"><use href="#ic-check"></use></svg>Rechnung erst nach Abschluss</span>
-          <span><svg aria-hidden="true"><use href="#ic-check"></use></svg>Beauftragung in zwei Minuten</span>
-        </p>
       </div>
       <div class="hero-visual">
         <figure style="margin:0">
@@ -538,32 +534,41 @@ details[open] summary{color:var(--accent)}
     </div>
   </section>
 
+  <!-- ================= TRUST-STRIP ================= -->
+  <div class="trust-strip">
+    <div class="container">
+      <ul>
+        <li><svg aria-hidden="true"><use href="#ic-check"></use></svg>Kein Erfolg, keine Kosten</li>
+        <li><svg aria-hidden="true"><use href="#ic-check"></use></svg>Rechnung erst nach Abschluss</li>
+        <li><svg aria-hidden="true"><use href="#ic-check"></use></svg>Start in 2 Minuten</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- ================= PROBLEM ================= -->
   <section class="section alt" id="problem">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">Die Ausgangslage</span>
-        <h2>Ein einziger Stern kann viel verschieben.</h2>
-        <p>Wer Sie zum ersten Mal sucht, sieht zuerst Ihre Sterne – und darunter meist die schlechtesten Bewertungen. Was dort steht, entscheidet oft in Sekunden über den ersten Anruf.</p>
+        <h2>Ein Stern senkt Ihren Schnitt.</h2>
       </div>
       <div class="problem-grid">
         <article class="p-card">
           <span class="p-icon"><svg aria-hidden="true"><use href="#ic-user"></use></svg></span>
           <h3>Nie Kunde gewesen</h3>
-          <p>Ein frisches Konto, ein Stern, kein Text – vielleicht ein Wettbewerber, vielleicht jemand aus einem völlig anderen Zusammenhang. Ihr Profil zeigt davon nichts.</p>
+          <p>Frisches Konto, ein Stern, kein Kontakt – oft ein Wettbewerber oder Troll.</p>
         </article>
         <article class="p-card">
           <span class="p-icon"><svg aria-hidden="true"><use href="#ic-alert"></use></svg></span>
           <h3>Angriff statt Kritik</h3>
-          <p>„Abzocke“, „Inkompetenz“, Namen von Mitarbeitenden. Das ist keine Meinungsäußerung mehr – Googles Richtlinien schließen solche Inhalte ausdrücklich aus.</p>
+          <p>Beleidigung statt Meinung – das muss nicht stehen bleiben.</p>
         </article>
         <article class="p-card">
           <span class="p-icon"><svg aria-hidden="true"><use href="#ic-trenddown"></use></svg></span>
           <h3>Der Schnitt leidet sichtbar</h3>
-          <p>Jeder zusätzliche 1-Stern-Eintrag drückt Ihren Durchschnitt. Und wer liest, neigt am Ende dazu, dem Schlimmsten zu glauben.</p>
+          <p>Jeder 1-Sterne-Eintrag drückt Ihren Schnitt – sichtbar für jeden, der Sie sucht.</p>
         </article>
       </div>
-      <p class="problem-close">Das müssen Sie nicht einfach hinnehmen. Aber Sie sollten es auch richtig angehen – <strong>ohne Grauzonen.</strong></p>
+      <p class="problem-close">Sie müssen das <strong>nicht</strong> hinnehmen.</p>
     </div>
   </section>
 
@@ -571,32 +576,30 @@ details[open] summary{color:var(--accent)}
   <section class="section" id="ablauf">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">So funktioniert es</span>
-        <h2>Vier Schritte – Sie bleiben jederzeit informiert.</h2>
+        <h2>Vier Schritte. Zwei Minuten.</h2>
       </div>
       <ol class="steps">
         <li>
           <span class="step-num" aria-hidden="true">1</span>
-          <h3>Sie schicken uns den Link</h3>
-          <p>Den Link zu Ihrem Google-Maps-Profil oder direkt zu einzelnen Bewertungen. Das Formular weiter unten füllen Sie in etwa zwei Minuten aus.</p>
+          <h3>Link schicken</h3>
+          <p>Google-Maps-Profil einreichen – dauert zwei Minuten.</p>
         </li>
         <li>
           <span class="step-num" aria-hidden="true">2</span>
-          <h3>Wir analysieren jede Bewertung einzeln</h3>
-          <p>Richtlinienverstoß, fehlender Kundenkontakt, Verwechslung, unwahre Behauptung – für jeden Fall bestimmen wir den stärksten Löschungsansatz. Sie erhalten vorab unsere ehrliche Einschätzung zu jeder einzelnen Bewertung.</p>
+          <h3>Wir prüfen jeden Fall</h3>
+          <p>Wir prüfen jede Bewertung gegen die Google-Richtlinien und wählen den stärksten Löschungsgrund.</p>
         </li>
         <li>
           <span class="step-num" aria-hidden="true">3</span>
-          <h3>Wir setzen jeden Fall bei Google durch</h3>
-          <p>Jede Meldung geht dokumentiert und mit dem stärksten Argument des jeweiligen Falles raus. Bleibt Google die Antwort schuldig, fassen wir nach – bis eine Entscheidung vorliegt.</p>
+          <h3>Wir melden bei Google</h3>
+          <p>Dokumentierte Meldung – Nachfassen inklusive.</p>
         </li>
         <li>
           <span class="step-num" aria-hidden="true">4</span>
           <h3>Löschung, dann Rechnung</h3>
-          <p>Erst wenn Google Bewertungen tatsächlich entfernt hat, stellen wir in Rechnung: 25&nbsp;€ pro erfolgreicher Löschung, ab der 5.&nbsp;Löschung im selben Auftrag je 20&nbsp;€ – zahlbar innerhalb von 14&nbsp;Tagen. Davor passiert finanziell nichts.</p>
+          <p>Zahlen erst nach Erfolg, 14 Tage Zahlungsfrist.</p>
         </li>
       </ol>
-      <p class="steps-note">Schritt 1 und 2 sind für Sie kostenlos und unverbindlich. Erst wenn Sie unserer Einschätzung zustimmen, beginnen wir mit den Meldungen.</p>
     </div>
   </section>
 
@@ -604,38 +607,27 @@ details[open] summary{color:var(--accent)}
   <section class="section alt" id="einordnung">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">Unser Ansatz</span>
-        <h2>Jede Bewertung bekommt ihren eigenen Plan.</h2>
-        <p>Sie sagen uns, welche Bewertungen stören – wir übernehmen jede einzelne davon, unabhängig von Sternezahl oder Textlänge. Für jeden Fall bestimmen wir den stärksten Ansatz und setzen ihn bei Google durch:</p>
+        <h2>Wir nehmen jeden Fall an.</h2>
       </div>
       <div class="honest-grid">
         <div class="honest-card honest-can">
-          <h3>Das nehmen wir ohne Wenn und Aber</h3>
-          <p class="sub">Typische Fälle aus der Praxis</p>
+          <h3>Typische Fälle</h3>
           <ul>
-            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>1-Stern-Bewertungen ohne Text und ohne erkennbaren Kundenkontakt</li>
-            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Beleidigungen, Schmähkritik und persönliche Herabsetzung</li>
-            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Unwahre Tatsachenbehauptungen („nie geliefert“ – trotz Beleg des Gegenteils)</li>
-            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Fake-Einträge, Konkurrenz-Trolling und bezahlte Abwertung</li>
-            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Beiträge von (ehemaligen) Mitarbeitenden aus Interessenkonflikt</li>
-            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Bewertungen mit personenbezogenen Daten wie Namen, Adressen oder Telefonnummern</li>
-            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Verwechslungen mit einem anderen Unternehmen oder Standort</li>
-            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Vulgäre Sprache, Hassrede und Belästigung</li>
+            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Beleidigungen &amp; Schmähkritik</li>
+            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Fake-Einträge &amp; Konkurrenz-Trolling</li>
+            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>1 Stern ohne Kundenkontakt</li>
+            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Personenbezogene Daten im Text</li>
+            <li><svg class="li-ic can-ic" aria-hidden="true"><use href="#ic-check"></use></svg>Verwechslungen mit anderen Betrieben</li>
           </ul>
         </div>
         <div class="honest-card honest-cant">
-          <h3>Und wenn eine Bewertung trotzdem bleibt?</h3>
-          <p class="sub">Dann greift Ihre Absicherung</p>
+          <h3>Ihre Absicherung</h3>
           <ul>
-            <li><svg class="li-ic cant-ic" aria-hidden="true"><use href="#ic-minus"></use></svg>Google entscheidet abschließend über jede Entfernung – eine Löschgarantie gibt es nirgends</li>
-            <li><svg class="li-ic cant-ic" aria-hidden="true"><use href="#ic-minus"></use></svg>Bleibt eine Bewertung stehen, ist dieser Fall für Sie komplett kostenfrei</li>
-            <li><svg class="li-ic cant-ic" aria-hidden="true"><use href="#ic-minus"></use></svg>Sie zahlen ausschließlich für Bewertungen, die tatsächlich verschwunden sind</li>
-            <li><svg class="li-ic cant-ic" aria-hidden="true"><use href="#ic-minus"></use></svg>Vor der Meldung erhalten Sie unsere ehrliche Einschätzung zu jedem Fall</li>
+            <li><svg class="li-ic cant-ic" aria-hidden="true"><use href="#ic-minus"></use></svg>Kein Erfolg, keine Kosten</li>
+            <li><svg class="li-ic cant-ic" aria-hidden="true"><use href="#ic-minus"></use></svg>Google entscheidet – wir dokumentieren jeden Fall</li>
+            <li><svg class="li-ic cant-ic" aria-hidden="true"><use href="#ic-minus"></use></svg>Ehrliche Einschätzung vorab</li>
           </ul>
         </div>
-      </div>
-      <div class="note-box">
-        <p><strong>Ihr Risiko bleibt null:</strong> Versuche sind für Sie immer kostenlos. Abgerechnet wird ausschließlich, was wirklich gelöscht wurde – erst danach, mit 14&nbsp;Tagen Zahlungsfrist.</p>
       </div>
     </div>
   </section>
@@ -644,13 +636,11 @@ details[open] summary{color:var(--accent)}
   <section class="section" id="vergleich">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">Der Vergleich</span>
-        <h2>Drei Wege zum selben Ziel – mit sehr unterschiedlichen Bedingungen.</h2>
-        <p>Sie können eine Bewertung selbst melden, einen Anwalt beauftragen oder Rufklar damit betrauen. Hier die ehrlichen Unterschiede:</p>
+        <h2>Selbst melden, Anwalt oder Rufklar?</h2>
       </div>
       <div class="table-wrap" role="region" aria-label="Vergleichstabelle: Selbst melden, Anwalt und Rufklar" tabindex="0">
         <table class="compare">
-          <caption class="sr-only">Vergleich von Kosten, Dauer, Aufwand und Risiko bei den drei Wegen zur Löschung einer Google-Bewertung</caption>
+          <caption class="sr-only">Vergleich von Kosten, Zahlung, Dauer und Risiko bei den drei Wegen zur Löschung einer Google-Bewertung</caption>
           <thead>
             <tr>
               <th scope="col">&nbsp;</th>
@@ -663,43 +653,30 @@ details[open] summary{color:var(--accent)}
             <tr>
               <th scope="row">Kosten</th>
               <td>kostenlos</td>
-              <td>ca. 200–500&nbsp;€ pro Fall, gerichtlich deutlich mehr</td>
-              <td class="hl">25&nbsp;€ pro erfolgreicher Löschung – ab der 5. Löschung im selben Auftrag je 20&nbsp;€</td>
+              <td>ca. 200–500&nbsp;€ pro Fall</td>
+              <td class="hl">25&nbsp;€ pro Löschung, ab der 5. je 20&nbsp;€</td>
             </tr>
             <tr>
               <th scope="row">Zahlung</th>
               <td>entfällt</td>
-              <td>Honorar unabhängig vom Ausgang – fällig auch bei Ablehnung</td>
-              <td class="hl">erst nach erfolgter Löschung, 14 Tage Zahlungsfrist</td>
-            </tr>
-            <tr>
-              <th scope="row">Erfolgsaussichten</th>
-              <td>unklar; Standardmeldungen werden häufig ohne Begründung abgelehnt</td>
-              <td>hoch, dank rechtlich fundierter Beanstandung</td>
-              <td class="hl">jede Bewertung wird einzeln geprüft und mit dem stärksten Ansatz gemeldet – mit Vorab-Einschätzung für Sie</td>
+              <td>fällig – auch bei Ablehnung</td>
+              <td class="hl">erst nach erfolgreicher Löschung</td>
             </tr>
             <tr>
               <th scope="row">Dauer</th>
-              <td>Tage bis Wochen, oft ohne Rückmeldung</td>
-              <td>Wochen bis Monate, gerichtlich länger</td>
-              <td class="hl">Heute beauftragen, Ergebnis meist binnen weniger Tage</td>
-            </tr>
-            <tr>
-              <th scope="row">Ihr Aufwand</th>
-              <td>Eigenrecherche: passende Meldekategorie, Formular, Nachfassen</td>
-              <td>Mandatierung, Vollmachten, Korrespondenz</td>
-              <td class="hl">Link einreichen – den Rest übernimmt Rufklar</td>
+              <td>Tage bis Wochen</td>
+              <td>Wochen bis Monate</td>
+              <td class="hl">meist wenige Tage</td>
             </tr>
             <tr>
               <th scope="row">Risiko</th>
-              <td>keines – aber auch kein durchsetzbarer Anspruch</td>
-              <td>Kosten entstehen in jedem Fall</td>
+              <td>Zeit verloren</td>
+              <td>Kosten in jedem Fall</td>
               <td class="hl">kein Erfolg, keine Kosten</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="table-note">Anwaltsangaben sind Erfahrungswerte außergerichtlicher Beanstandungen; im Streitfall (einstweilige Verfügung, Klage) fallen spürbar höhere Beträge an.</p>
     </div>
   </section>
 
@@ -708,8 +685,8 @@ details[open] summary{color:var(--accent)}
     <div class="container">
       <div class="section-head">
         <span class="kicker">Preise</span>
-        <h2>Sie zahlen für Ergebnisse, nicht für Versuche.</h2>
-        <p>Sie entscheiden selbst, wie viele Bewertungen wir übernehmen – von 1 bis 20. Pro erfolgreicher Löschung fallen 25&nbsp;€ an, ab der 5.&nbsp;Löschung im selben Auftrag nur noch 20&nbsp;€ pro Stück. Was Google ablehnt, kostet Sie nichts.</p>
+        <h2>Nur zahlen, was gelöscht wurde.</h2>
+        <p>Sie wählen selbst, wie viele Bewertungen wir übernehmen – der Staffelpreis greift automatisch.</p>
       </div>
       <div class="calc" role="group" aria-label="Preisrechner">
         <div class="calc-controls">
@@ -755,10 +732,9 @@ details[open] summary{color:var(--accent)}
         </div>
       </div>
       <div class="terms-grid">
-        <p class="term"><svg aria-hidden="true"><use href="#ic-check"></use></svg>Rechnung erst nach Abschluss aller Fälle – mit 14&nbsp;Tagen Zahlungsfrist</p>
-        <p class="term"><svg aria-hidden="true"><use href="#ic-check"></use></svg>Keine Grundgebühr, kein Abo, keine Vorkasse</p>
-        <p class="term"><svg aria-hidden="true"><use href="#ic-check"></use></svg>Lehnt Google einen Fall ab, ist dieser Fall für Sie kostenfrei</p>
-        <p class="term"><svg aria-hidden="true"><use href="#ic-check"></use></svg>Prüfung und Ersteinschätzung sind immer kostenlos</p>
+        <p class="term"><svg aria-hidden="true"><use href="#ic-check"></use></svg>Rechnung erst nach Abschluss</p>
+        <p class="term"><svg aria-hidden="true"><use href="#ic-check"></use></svg>14 Tage Zahlungsfrist</p>
+        <p class="term"><svg aria-hidden="true"><use href="#ic-check"></use></svg>Abgelehnte Fälle kosten nichts</p>
       </div>
     </div>
   </section>
@@ -767,37 +743,24 @@ details[open] summary{color:var(--accent)}
   <section class="section" id="faq">
     <div class="container">
       <div class="section-head">
-        <span class="kicker">Häufige Fragen</span>
-        <h2>Gute Fragen, klare Antworten.</h2>
+        <h2>Kurze Fragen, kurze Antworten.</h2>
       </div>
       <div class="faq-list">
         <details>
           <summary>Ist das legal?<span class="fx" aria-hidden="true"></span></summary>
-          <p class="faq-answer">Ja. Wir schreiben keine Gegenbewertungen, legen keine fremden Konten an und wenden uns auch nicht an die Verfasser. Wir nutzen ausschließlich den Weg, den Google selbst vorgesehen hat: die Meldung von Inhalten, die gegen die eigenen Richtlinien verstoßen. Ihre Bewertungen bleiben vollständig online, bis Google selbst darüber entscheidet.</p>
+          <p class="faq-answer">Ja. Wir nutzen ausschließlich den offiziellen Meldeprozess von Google. Kein Konto-Zugriff, keine Fake-Antworten.</p>
         </details>
         <details>
-          <summary>Wie wird abgerechnet?<span class="fx" aria-hidden="true"></span></summary>
-          <p class="faq-answer">Ausschließlich nach Erfolg: 25&nbsp;€ pro erfolgreich gelöschter Bewertung, ab der 5.&nbsp;Löschung im selben Auftrag 20&nbsp;€ je Löschung. Die Rechnung geht erst heraus, wenn die Löschungen abgeschlossen sind, und hat eine Zahlungsfrist von 14&nbsp;Tagen. Eine Vorkasse gibt es nicht.</p>
+          <summary>Was kostet es?<span class="fx" aria-hidden="true"></span></summary>
+          <p class="faq-answer">25&nbsp;€ pro erfolgreicher Löschung, ab der 5. nur 20&nbsp;€. Ablehnungen kosten nichts.</p>
         </details>
         <details>
-          <summary>Was passiert, wenn Google einen Fall ablehnt?<span class="fx" aria-hidden="true"></span></summary>
-          <p class="faq-answer">Dann ist dieser Fall für Sie komplett kostenfrei. Wir informieren Sie über die Entscheidung und sagen Ihnen ehrlich, ob ein erneuter Anlauf Aussicht hätte – oder ob die Bewertung zulässige Kritik enthält, die stehen bleiben darf.</p>
+          <summary>Wie schnell geht das?<span class="fx" aria-hidden="true"></span></summary>
+          <p class="faq-answer">Meist wenige Tage. Wir fassen nach, bis Google entschieden hat.</p>
         </details>
         <details>
-          <summary>Wie lange dauert eine Löschung?<span class="fx" aria-hidden="true"></span></summary>
-          <p class="faq-answer">Google bearbeitet gut begründete Meldungen meist binnen weniger Tage; in vielen Fällen ist die Bewertung schon am nächsten Werktag verschwunden. Stellt Google Rückfragen, dauert es entsprechend länger. Wir behalten jeden Fall im Blick, bis eine Entscheidung vorliegt – und melden uns, sobald sich etwas tut.</p>
-        </details>
-        <details>
-          <summary>Nehmen Sie wirklich jede Bewertung an?<span class="fx" aria-hidden="true"></span></summary>
-          <p class="faq-answer">Ja. Sie entscheiden selbst, welche und wie viele Bewertungen wir übernehmen – von 1 bis 20, unabhängig von Sternezahl oder Grund. Ob Google im Einzelfall entfernt, entscheidet die Prüfung; deshalb zahlen Sie ausschließlich im Erfolgsfall. Der Staffelpreis greift dabei automatisch: Ab der 5. erfolgreichen Löschung im selben Auftrag kostet jede weitere nur noch 20&nbsp;€ statt 25&nbsp;€.</p>
-        </details>
-        <details>
-          <summary>Sehen Sie meine Bewertungen, bevor ich beauftrage?<span class="fx" aria-hidden="true"></span></summary>
-          <p class="faq-answer">Ja, genau dafür ist der erste Schritt da. Wir sichten Ihr Profil vollständig und nennen Ihnen vorab, welche Bewertungen wir für regelwidrig halten – und warum. Erst wenn Sie dieser Einschätzung zustimmen, beginnt die eigentliche Arbeit. Und damit irgendwann eine Rechnung.</p>
-        </details>
-        <details>
-          <summary>Kann ich mehrere Standorte angeben?<span class="fx" aria-hidden="true"></span></summary>
-          <p class="faq-answer">Ja. Geben Sie im Formular einfach alle relevanten Profile an. Geprüft und abgerechnet wird gebündelt – Sie haben eine Ansprechperson und eine gemeinsame Übersicht über alle laufenden Fälle.</p>
+          <summary>Was, wenn Google ablehnt?<span class="fx" aria-hidden="true"></span></summary>
+          <p class="faq-answer">Dann kostet Sie dieser Fall nichts. Punkt.</p>
         </details>
       </div>
     </div>
@@ -807,9 +770,8 @@ details[open] summary{color:var(--accent)}
   <section class="section alt cta-final" id="kontakt">
     <div class="container">
       <div class="inner">
-        <span class="kicker">Nächster Schritt</span>
-        <h2>Starten Sie mit der kostenlosen Prüfung.</h2>
-        <p style="margin-top:16px;font-size:1.06rem">Schicken Sie uns den Link zu Ihrem Google-Profil. Sie erhalten unsere ehrliche Einschätzung: welche Bewertungen regelwidrig sind, welche Chancen wir sehen – und was es Sie im Erfolgsfall kosten würde. Erst danach entscheiden Sie.</p>
+        <h2>Jetzt kostenlos prüfen lassen.</h2>
+        <p style="margin-top:16px;font-size:1.06rem">Google-Maps-Link einreichen – Sie erhalten eine kostenlose Ersteinschätzung.</p>
 
         <div class="form-card">
           <form id="anfrage" class="form-grid" action="#" novalidate>
@@ -832,7 +794,7 @@ details[open] summary{color:var(--accent)}
               <input type="number" id="anzahl" name="anzahl" min="1" max="50" inputmode="numeric" placeholder="z. B. 3 – leer lassen, wenn noch unklar">
             </div>
             <div class="form-foot">
-              <button type="submit" class="btn btn-primary">Kostenlose Prüfung anfragen</button>
+              <button type="submit" class="btn btn-primary">Kostenlos prüfen lassen</button>
               <small>Unverbindlich und kostenlos. Ihre Angaben dienen allein der Bearbeitung Ihrer Anfrage.</small>
             </div>
           </form>
